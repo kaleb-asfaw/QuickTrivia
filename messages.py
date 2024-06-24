@@ -16,8 +16,8 @@ def print_categories(categories):
         print(formatted_category)
     print("----------------------------")
     print("\n")
-    category = int(input("Please select a category by its ID:"))
-    return category + 8
+    category = str(input("Please select a category by its ID: "))
+    return category
 
 def print_options(arr, ans):
     '''

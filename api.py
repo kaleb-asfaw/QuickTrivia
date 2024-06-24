@@ -72,10 +72,13 @@ def get_trivia_questions(category, amount=10, difficulty='medium', question_type
 
 
 # parsing this info to look at sample questions
+def parse_data(response):
+    for data in response['results']:
+        # here, we index certain attributes about each of the 10 questions
+        print(data['question'])
+        print(data['correct_answer'])
+        print(data['incorrect_answers'])
 
+    
 # response = get_trivia_questions(9)
-
-# for data in response['results']:
-#     print(data['question'])
-# for data in response['results']:
-    # print(data['correct_answer'])
+# parse_data(response)
