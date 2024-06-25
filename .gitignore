@@ -1,0 +1,15 @@
+# Virtual environment
+.venv/
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore environment-specific 
+configuration files
+.env
+
+# Ignore the Firebase service 
+account key
+serviceAccountKey.json
+
