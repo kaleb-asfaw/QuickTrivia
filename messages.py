@@ -46,5 +46,5 @@ def print_correct_guess():
 def print_incorrect_guess():
     print("Ha, loser!")
 
-def print_endgame(category):
+def print_endgame(): # maybe add leaderboards per category
     print("Thank you for playing!")

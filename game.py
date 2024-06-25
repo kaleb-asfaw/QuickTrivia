@@ -1,3 +1,6 @@
+import firebase_admin
+from firebase_admin import credentials, firestore
+import leaderboard as db
 from api import get_trivia_questions
 import constants as c
 import messages as m
@@ -13,6 +16,7 @@ while category not in c.NUMS:
 response = get_trivia_questions(int(category)+8)
 
 
+score = 0
 # Now, we process the response
 for i, q_data in enumerate(response["results"]):
     question = q_data["question"]
@@ -28,7 +32,11 @@ for i, q_data in enumerate(response["results"]):
 
     if mapping[choice] == "CORRECT":
         m.print_correct_guess()
+        score += 5
     else:
         m.print_incorrect_guess()
+        score -= 2
+m.print_endgame()
 
-m.print_endgame(category)
+# now, let's update the global leaderboard
+db.add_score(username, score)
