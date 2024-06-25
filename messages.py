@@ -8,15 +8,15 @@ def print_categories(categories):
         formatted_categories.append(f"- {name} (ID: {id})")
     
 
-    print("Here is the list of trivia categories")
-    print("\n")
+    print("Here is the list of trivia categories:")
+    # print("\n")
     print("----------------------------")
     
     for formatted_category in formatted_categories:
         print(formatted_category)
     print("----------------------------")
-    print("\n")
-    category = str(input("Please select a category by its ID: "))
+    # print("\n")
+    category = str(input("Please select a category by its ID> "))
     return category
 
 def print_options(arr, ans):
