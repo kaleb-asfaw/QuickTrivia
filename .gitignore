@@ -1,5 +1,5 @@
 # Virtual environment
-.venv/
+env/
 
 # Ignore Python bytecode files
 *.pyc
