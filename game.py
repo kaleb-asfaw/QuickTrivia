@@ -4,9 +4,14 @@ import leaderboard as db
 from api import get_trivia_questions
 import constants as c
 import messages as m
+import loc_scoreboard as sb
 import random
 
-username = str(input("Hello! To begin, please enter a username: "))
+# We will store the username in a local database as well as the total points scored
+# If the username is already in the database the total score will be updated
+username = str(input("Hello! To begin, please enter a username> "))
+points = 0; # points scored in this game session
+num_questions = 0
 
 category = m.print_categories(c.CATEGORIES)
 while category not in c.NUMS:
@@ -16,7 +21,6 @@ while category not in c.NUMS:
 response = get_trivia_questions(int(category)+8)
 
 
-score = 0
 # Now, we process the response
 for i, q_data in enumerate(response["results"]):
     question = q_data["question"]
@@ -30,13 +34,23 @@ for i, q_data in enumerate(response["results"]):
     while choice not in ["a", "b", "c", "d"]:
         choice = input("Invalid selection, please enter one of the following: a, b, c, or d: ")
 
+    num_questions += 1
     if mapping[choice] == "CORRECT":
         m.print_correct_guess()
-        score += 5
+        points += 1
+        print("You got one point! Current points: ", points)
     else:
         m.print_incorrect_guess()
-        score -= 2
-m.print_endgame()
+        print("No point for you :( current points: ", points)
 
+# update the scoreboard
+sb.update_scoreboard(username, points)
 # now, let's update the global leaderboard
 db.add_score(username, score)
+
+#print ending message and current leaderboard
+m.print_endgame()
+print()
+print(f"Congratulations, you got {points} / {num_questions} questions!")
+sb.print_scoreboard()
+m.print_endgame(category)
