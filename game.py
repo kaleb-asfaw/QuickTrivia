@@ -1,3 +1,6 @@
+import firebase_admin
+from firebase_admin import credentials, firestore
+import leaderboard as db
 from api import get_trivia_questions
 import constants as c
 import messages as m
@@ -42,10 +45,12 @@ for i, q_data in enumerate(response["results"]):
 
 # update the scoreboard
 sb.update_scoreboard(username, points)
+# now, let's update the global leaderboard
+db.add_score(username, score)
 
 #print ending message and current leaderboard
+m.print_endgame()
 print()
 print(f"Congratulations, you got {points} / {num_questions} questions!")
-
 sb.print_scoreboard()
 m.print_endgame(category)
