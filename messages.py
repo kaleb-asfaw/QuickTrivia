@@ -1,3 +1,5 @@
+import html
+
 def print_categories(categories):
     '''
     Given list of tuples (category name, ID) will display info to users.
@@ -30,7 +32,7 @@ def print_options(arr, ans):
 
     # Print each option with its corresponding letter
     for i, choice in enumerate(arr):
-        print(f"{chr(97 + i)}. {choice}")
+        print(f"   {chr(97 + i)}. {html.unescape(choice)}")
 
     mapping = {}
     for i, choice in enumerate(arr):
@@ -41,10 +43,10 @@ def print_options(arr, ans):
     return mapping
 
 def print_correct_guess():
-    print("Good job I guess.")
+    return "Correct! +1 point"
 
 def print_incorrect_guess():
-    print("Ha, loser!")
+    return "Incorrect, sorry!"
 
 def print_endgame(): # maybe add leaderboards per category
-    print("Thank you for playing!")
+    return "Thanks for playing!"

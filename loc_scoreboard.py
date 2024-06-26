@@ -42,15 +42,19 @@ def print_scoreboard():
     conn = sqlite3.connect('scoreboard.db')
     cursor = conn.cursor()
 
-    cursor.execute('SELECT username, score from Users ORDER BY score DESC LIMIT 10')
+    cursor.execute('SELECT username, score from Users ORDER BY score DESC LIMIT 5')
     top_users = cursor.fetchall()
+
+    max_username_length = max(len(user[0]) for user in top_users) if top_users else 0
 
     print()
     print("**************************************")
-    print("          TOP 10 LEADERBOARD          ")
+    print("          LOCAL LEADERBOARD           ")
     print("**************************************")
     for index, user in enumerate(top_users, start = 1):
-        print(f'{index}. {user[0]}      {user[1]}')
+        username = user[0]
+        score = user[1]
+        print(f'{index}. {username.ljust(max_username_length)}                  {score}')
     print("**************************************")
     print("login with same username to save score")
     print("**************************************")
