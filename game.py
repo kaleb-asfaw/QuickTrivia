@@ -41,16 +41,16 @@ for i, q_data in enumerate(response["results"]):
         print("You got one point! Current points: ", points)
     else:
         m.print_incorrect_guess()
-        print("No point for you :( current points: ", points)
+        print("No point for you :( Current points: ", points)
 
 # update the scoreboard
 sb.update_scoreboard(username, points)
 # now, let's update the global leaderboard
-db.add_score(username, score)
+db.add_score(username, points)
 
 #print ending message and current leaderboard
 m.print_endgame()
 print()
 print(f"Congratulations, you got {points} / {num_questions} questions!")
 sb.print_scoreboard()
-m.print_endgame(category)
+m.print_endgame()

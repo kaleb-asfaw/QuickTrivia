@@ -13,3 +13,5 @@ configuration files
 account key
 serviceAccountKey.json
 
+# Ignore SQLite database files
+*.db
