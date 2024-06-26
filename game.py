@@ -15,6 +15,7 @@ init()  # Initialize colorama
 
 # We will store the username in a local database as well as the total points scored
 # If the username is already in the database the total score will be updated
+print(Fore.GREEN)
 username = f.get_username()
 points = 0; # points scored in this game session
 num_questions = 0
@@ -37,7 +38,7 @@ for i, q_data in enumerate(response["results"]):
     print(Fore.BLUE+'>>>')
     print(f"Question {i+1}: {question}")
     mapping = f.print_options(options, ans)
-    choice = input("Enter your answer (a, b, c, or d): ")
+    choice = input(Fore.YELLOW+"Enter your answer (a, b, c, or d): ")
     while choice.lower() not in ["a", "b", "c", "d"]:
         choice = input("Invalid selection, please enter one of the following: a, b, c, or d: ")
 
