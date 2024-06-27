@@ -27,5 +27,5 @@ CATEGORIES = [
 ]
 NUMS = [str(i) for i in range(1, 25)]
 
-PROHIBITED = {'global_best', 'oj', 'OJ', 'Oj', ''}
+PROHIBITED = {'global_best', 'oj', 'OJ', 'Oj'}
 PROTECTED = {"oJ"}

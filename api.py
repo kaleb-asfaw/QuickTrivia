@@ -1,4 +1,5 @@
 import requests
+import json
 
 # we have (thus far) decided to set question type to default multiple and difficulty to medium
 s = "hello"
@@ -67,7 +68,7 @@ def get_trivia_questions(category, amount=10, difficulty='medium', question_type
 
     response = requests.get(base_url, params=params)
     response.raise_for_status()
-    return response.json()
+    return response
 
 
 # parsing this info to look at sample questions
@@ -79,5 +80,5 @@ def parse_data(response):
         print(data['incorrect_answers'])
 
     
-# response = get_trivia_questions(9)
+# response = get_trivia_questions(9).json()
 # parse_data(response)
