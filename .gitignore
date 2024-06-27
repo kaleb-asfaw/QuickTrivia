@@ -16,5 +16,5 @@ serviceAccountKey.json
 # Ignore SQLite database files
 *.db
 
-# Ignore credentials file (users will setup as env variable
+# Ignore credentials file (users will setup as env variable)
 credentials.json
