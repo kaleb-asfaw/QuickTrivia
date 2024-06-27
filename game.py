@@ -13,7 +13,7 @@ init()  # Initialize colorama
 # If the username is already in the database the total score will be updated
 username = f.get_username()
 print(Fore.GREEN+f'Hi {username}')
-points = 0; # points scored in this game session
+points = 0    # points scored in this game session
 num_questions = 0
 
 category = f.print_categories(c.CATEGORIES)
@@ -51,7 +51,7 @@ sb.update_scoreboard(username, points)
 # now, let's update the global leaderboard
 db.add_score(username, points)
 
-#print ending message and current leaderboard
+# print ending message and current leaderboard
 print(Fore.MAGENTA+"~~~")
 print(Fore.MAGENTA+"That's the end of the Trivia")
 print(Fore.GREEN + f"you got {points} / {num_questions} questions!") 
