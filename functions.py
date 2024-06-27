@@ -4,6 +4,7 @@ import leaderboard as db
 import html
 from colorama import Fore, Style, init
 
+
 def validate_username(username):
     # Convert username to lowercase
     if username not in c.PROTECTED:
@@ -116,7 +117,6 @@ def print_global_leaderboard():
     print("**************************************")
     print("       username saves globally        ")
     print("**************************************")
-
 
     print(print_endgame()+" Feel free to play again and try any of our other 23 trivia categories.")
 
