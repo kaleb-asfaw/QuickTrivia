@@ -21,7 +21,7 @@ while category not in c.NUMS:
     category = input(Fore.RED+"Please choose a valid category. See the options above and select a corresponding number (1-24): ")
 
 # Here is the trivia match data that should be relayed to users one question at a time
-response = get_trivia_questions(int(category)+8)
+response = get_trivia_questions(int(category)+8).json()
 
 print(Fore.MAGENTA + "Trivia starts now!")
 
