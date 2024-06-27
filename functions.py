@@ -1,6 +1,8 @@
 import re
 import constants as c
 import leaderboard as db
+import html
+from colorama import Fore, Style, init
 
 def validate_username(username):
     # Convert username to lowercase
@@ -27,7 +29,7 @@ def validate_username(username):
     return "VALID"
 
 def get_username():
-    username = input("Hello! To begin, please enter a username> ").strip()
+    username = input(Fore.YELLOW+"Hello! To begin, please enter a username> ").strip()
     while True:
         msg = validate_username(username)
         if username in c.PROTECTED:
@@ -67,14 +69,14 @@ def print_categories(categories):
     
 
     print("Here is the list of trivia categories:")
-    print("\n")
+    # print("\n")
     print("----------------------------")
     
     for formatted_category in formatted_categories:
         print(formatted_category)
     print("----------------------------")
     # print("\n")
-    category = str(input("Please select a category by its ID> "))
+    category = str(input(Fore.YELLOW+"Please select a category by its ID> "))
     return category
 
 def print_options(arr, ans):
@@ -88,7 +90,7 @@ def print_options(arr, ans):
 
     # Print each option with its corresponding letter
     for i, choice in enumerate(arr):
-        print(f"{chr(97 + i)}. {choice}")
+        print(Fore.BLUE+f"  {chr(97 + i)}. {html.unescape(choice)}")
 
     mapping = {}
     for i, choice in enumerate(arr):
@@ -99,21 +101,32 @@ def print_options(arr, ans):
     return mapping
 
 def print_global_leaderboard():
-    print(f"Thank you for playing, feel free to play again and try any of our other 23 trivia categories!")
-    print("Here is the global leaderboard:")
+    # print("Here is the global leaderboard:")
 
     global_best = db.get_leaderboard()
-    if global_best:
-        for i, entry in enumerate(global_best[0]["scores"]):
-            print(f"{i + 1}. {entry['username']} - {entry['score']} points")
-    else:
-        print("No global best scores available.")
+    users = global_best[0]["scores"]
+    max_username_length = max(len(user['username']) for user in users) if users else 0
+
+    # if not global_best:
+    #     print("No global best scores available.")
+
+    print("**************************************")
+    print("          GLOBAL LEADERBOARD          ")
+    print("**************************************")
+    for i, entry in enumerate(users):
+        print(f'{i+1}.  {entry['username'].ljust(max_username_length)}                  {entry['score']}')
+    print("**************************************")
+    print("       username saves globally        ")
+    print("**************************************")
+
+
+    print(print_endgame()+" Feel free to play again and try any of our other 23 trivia categories.")
 
 def print_correct_guess():
-    print("Good job I guess.")
+    return "Correct! +1 point"
 
 def print_incorrect_guess():
-    print("Ha, loser!")
+    return "Incorrect, sorry!"
 
 def print_endgame(): # maybe add leaderboards per category
-    print("Thank you for playing!")
+    return "Thank you for playing!"
