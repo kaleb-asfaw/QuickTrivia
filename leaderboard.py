@@ -1,10 +1,17 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import os
+
+# Use the environment variable for the path to the service account key
+cred_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+if not cred_path:
+    raise ValueError("The environment variable GOOGLE_APPLICATION_CREDENTIALS is not set.")
 
 # Initialize Firebase Admin SDK with the service account key
-cred = credentials.Certificate("credentials.json")
+cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
+
 
 def add_score(username, score):
     user_ref = db.collection('leaderboard').document(username)
