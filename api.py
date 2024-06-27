@@ -1,5 +1,4 @@
 import requests
-import json
 
 # we have (thus far) decided to set question type to default multiple and difficulty to medium
 s = "hello"

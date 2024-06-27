@@ -114,7 +114,7 @@ def print_global_leaderboard():
     print("          GLOBAL LEADERBOARD          ")
     print("**************************************")
     for i, entry in enumerate(users):
-        print(f'{i+1}.  {entry['username'].ljust(max_username_length)}                  {entry['score']}')
+        print(f"{i+1}.  {entry['username'].ljust(max_username_length)}                  {entry['score']}")
     print("**************************************")
     print("       username saves globally        ")
     print("**************************************")
