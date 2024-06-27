@@ -128,5 +128,5 @@ def print_correct_guess():
 def print_incorrect_guess():
     return "Incorrect, sorry!"
 
-def print_endgame(): # maybe add leaderboards per category
+def print_endgame(): 
     return "Thank you for playing!"
