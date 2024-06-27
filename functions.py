@@ -68,7 +68,9 @@ def print_categories(categories):
         name, id = category
         formatted_categories.append(f"- {name} (ID: {id})")
     
+
     print("Here is the list of trivia categories:")
+    # print("\n")
     print("----------------------------")
     
     for formatted_category in formatted_categories:

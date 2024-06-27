@@ -27,7 +27,7 @@ print(Fore.MAGENTA + "Trivia starts now!")
 
 # Now, we process the response
 for i, q_data in enumerate(response["results"]):
-    question = html.unescape(q_data["question"])    # we html unescape to remove weird & : thingies
+    question = html.unescape(q_data["question"]) # we html unescape to remove weird & : thingies
     ans = q_data["correct_answer"]
     options = q_data["incorrect_answers"] + [ans]
     random.shuffle(options)

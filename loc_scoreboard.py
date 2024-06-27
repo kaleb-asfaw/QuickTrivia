@@ -51,7 +51,7 @@ def print_scoreboard():
     print("**************************************")
     print("          LOCAL LEADERBOARD           ")
     print("**************************************")
-    for index, user in enumerate(top_users, start=1):
+    for index, user in enumerate(top_users, start = 1):
         username = user[0]
         score = user[1]
         print(f'{index}. {username.ljust(max_username_length)}                  {score}')
