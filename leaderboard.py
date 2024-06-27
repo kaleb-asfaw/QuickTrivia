@@ -27,7 +27,6 @@ def add_score(username, score):
 
     update_global_best(score, username)
 
-
 def update_global_best(score, username):
     global_best_ref = db.collection('leaderboard').document('global_best')
     global_best_doc = global_best_ref.get()
@@ -35,9 +34,7 @@ def update_global_best(score, username):
     if global_best_doc.exists:
         global_best_scores = global_best_doc.to_dict().get('scores', [])
         global_best_scores.append({'score': score, 'username': username})
-        global_best_scores = sorted(global_best_scores,
-                                    key=lambda x: x['score'],
-                                    reverse=True)[:10]
+        global_best_scores = sorted(global_best_scores, key=lambda x: x['score'], reverse=True)[:10]
     else:
         global_best_scores = [{'score': score, 'username': username}]
 
@@ -46,5 +43,4 @@ def update_global_best(score, username):
 
 def get_leaderboard():
     leaderboard_ref = db.collection('leaderboard')
-    return [doc.to_dict() for doc in leaderboard_ref.order_by('scores',
-                                                              direction=firestore.Query.DESCENDING).stream()]
+    return [doc.to_dict() for doc in leaderboard_ref.order_by('scores', direction=firestore.Query.DESCENDING).stream()]
