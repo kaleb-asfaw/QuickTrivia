@@ -9,14 +9,10 @@ from colorama import Fore, Style, init
 
 init()  # Initialize colorama
 
-# print(Fore.RED + "This is red text") sample colorama text [can be deleted]
-# print(Fore.GREEN + "This is green text")
-# print(Style.RESET_ALL + "Back to normal text")
-
 # We will store the username in a local database as well as the total points scored
 # If the username is already in the database the total score will be updated
-print(Fore.GREEN)
 username = f.get_username()
+print(Fore.GREEN+f'Hi {username}')
 points = 0; # points scored in this game session
 num_questions = 0
 
@@ -44,22 +40,20 @@ for i, q_data in enumerate(response["results"]):
 
     num_questions += 1
     if mapping[choice.lower()] == "CORRECT":
-        f.print_correct_guess()
+        print(Fore.GREEN+f.print_correct_guess())
         points += 1
         print(Fore.MAGENTA + "Current points: ", points)
     else:
-        f.print_incorrect_guess()
-        print("No point for you :( Current points: ", points)
-
+        print(Fore.RED+f.print_incorrect_guess())
+        print(Fore.MAGENTA + "Current points: ", points)
 # update the scoreboard
 sb.update_scoreboard(username, points)
 # now, let's update the global leaderboard
 db.add_score(username, points)
 
 #print ending message and current leaderboard
-f.print_endgame()
-print()
-print(f"Congratulations, you got {points} / {num_questions} questions!")
+print(Fore.MAGENTA+"~~~")
+print(Fore.MAGENTA+"That's the end of the Trivia")
+print(Fore.GREEN + f"you got {points} / {num_questions} questions!") 
 sb.print_scoreboard()
 f.print_global_leaderboard()
-f.print_endgame()
