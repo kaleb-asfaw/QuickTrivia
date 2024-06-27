@@ -17,4 +17,4 @@ serviceAccountKey.json
 *.db
 
 # Ignore credentials file (users will setup as env variable)
-credentials.json
+*.json
