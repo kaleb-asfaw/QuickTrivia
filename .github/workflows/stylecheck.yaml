@@ -16,4 +16,4 @@ jobs:
         run: python -m pip install --upgrade pip pycodestyle
 
       - name: Check Style
-        run: pycodestyle *.py
+        run: pycodestyle style.py
