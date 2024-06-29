@@ -1,7 +1,7 @@
 import unittest, time, sys, os
-# Add the root directory to the sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import api as ape
+# Send the root of the directory being reference DOWN 2 LEVELS
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+import src.api as ape
 
 
 class TestAPI(unittest.TestCase):

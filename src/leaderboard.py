@@ -1,9 +1,11 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import sys, os
 
 
 # Use the environment variable for the path to the service account key
-cred_path = "credentials.json"
+# cred_path = "credentials.json"
+cred_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'credentials.json'))
 if not cred_path:
     raise ValueError("The credentials are not set.")
 
