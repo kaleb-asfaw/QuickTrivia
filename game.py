@@ -1,8 +1,8 @@
-import leaderboard as db
-from api import get_trivia_questions
-import constants as c
-import functions as f
-import loc_scoreboard as sb
+import src.leaderboard as db
+from src.api import get_trivia_questions
+import src.constants as c
+import src.functions as f
+import src.loc_scoreboard as sb
 import random
 import html
 from colorama import Fore, Style, init

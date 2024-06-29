@@ -1,6 +1,6 @@
 import re
-import constants as c
-import leaderboard as db
+import src.constants as c
+import src.leaderboard as db
 import html
 from colorama import Fore, Style, init
 
