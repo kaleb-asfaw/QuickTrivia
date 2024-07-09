@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, url_for
 from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
+from config import SECRET_KEY
 
 
 
@@ -10,8 +11,8 @@ proxied = FlaskBehindProxy(app)
 # 1. open python interpreter by running python3 in terminal
 # 2. run import secrets
 # 3. run secrets.token_hex(16), then exit() to exit the interpreter
-# 4. uncomment the line below and replace YOUR_SECRET with the output in the terminal
-# app.config['SECRET_KEY'] = 'YOUR_SECRET'
+# 4. create a file called config.py and add this line: SECRET_KEY = 'paste your secret key here'
+app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route("/")                          # this tells you the URL the method below is related to
 def home():
