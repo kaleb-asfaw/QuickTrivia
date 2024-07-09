@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+
+                <div class="form-group"> <!-- form group for username -->
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %} <!-- jinja error checking -->
+                      {{ form.username(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                        {% for error in form.username.errors%}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %} <!-- if no errors, take username from username StringField in forms.py -->
+                      {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group"> <!-- same thing for email StringField -->
+                  {{ form.email.label(class="form-control-label") }}
+                  {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.email.errors%}
+                          <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                  {% endif %}
+                </div>
+
+
+              <div class="form-group"> <!-- same thing for password PasswordField -->
+                  {{ form.password.label(class="form-control-label") }}
+                  {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.password.errors%}
+                          <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
+
+
+              <div class="form-group"> <!-- same thing for confirm_password PasswordField -->
+                  {{ form.confirm_password.label(class="form-control-label") }}
+                  {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.confirm_password.errors%}
+                          <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
+
+          </fieldset> <!-- close fieldset -->
+
+
+          <div class="form-group"> <!-- submit button (submit in forms.py) -->
+             {{ form.submit(class="btn btn-outline-info") }}
+          </div>
+        </form>
+     </div>
+ {% endblock content %}
+
+

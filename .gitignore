@@ -8,6 +8,7 @@ __pycache__/
 # Ignore environment-specific 
 configuration files
 .env
+config.py
 
 # Ignore the Firebase service 
 account key
