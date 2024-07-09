@@ -66,5 +66,5 @@ python3 game.py
 ```
 and enjoy playing!
 
-[![Check Style](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/stylecheck.yaml/badge.svg)](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/stylecheck.yaml)
+
 [![Tests](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/testunits.yaml/badge.svg)](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/testunits.yaml)
