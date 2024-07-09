@@ -27,7 +27,7 @@ proxied = FlaskBehindProxy(app)
 # 1. open python interpreter by running python3 in terminal
 # 2. run import secrets
 # 3. run secrets.token_hex(16), then exit() to exit the interpreter
-# 4. create a file called config.py and add this line: SECRET_KEY = 'paste your secret key here'
+# 4. create a file called config.py (in the quicktrivia folder) and add this line: SECRET_KEY = 'paste your secret key here'
 app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route("/")                          # this tells you the URL the method below is related to
