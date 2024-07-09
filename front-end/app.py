@@ -1,10 +1,24 @@
-from flask import Flask, render_template, url_for, flash, redirect, url_for
+from flask import Flask, render_template, url_for, flash, redirect, url_for, request
 from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config import SECRET_KEY
 
+
+questions = [
+    {
+        'question': 'What is the capital of France?',
+        'choices': ['a) Paris', 'b) London', 'c) Berlin', 'd) Rome'],
+        'correct_answer': 'a'
+    },
+    {
+        'question': 'Who wrote "Hamlet"?',
+        'choices': ['a) William Shakespeare', 'b) Jane Austen', 'c) Charles Dickens', 'd) Mark Twain'],
+        'correct_answer': 'a'
+    },
+    # Add more questions here as needed
+]
 
 
 app = Flask(__name__)                    # this gets the name of the file so Flask knows it's name
@@ -24,13 +38,33 @@ def home():
 def second_page():
     return render_template('results.html', subtitle='Results Page', text='This is the results page')
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit(): # checks if entries are valid
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home')) # if so - send to home page
-    return render_template('register.html', title='Register', form=form)
+@app.route("/gamepage")
+def gamepage():
+    return render_template('gamepage.html', questions=questions)
+
+# TODO: merge this page with results so that we display the users' individual score and then the leaderboard stuffs
+@app.route('/submit-trivia', methods=['POST'])
+def submit_trivia():
+    score = 0
+    for i, question in enumerate(questions):
+        # Get the selected answer for each question
+        selected_answer = request.form.get(f'question{i + 1}')[0]
+        # Check if the selected answer is correct
+        # print('selected answer: ', selected_answer)
+        # print('correct answer', question['correct_answer'])
+        if selected_answer == question['correct_answer']:
+            score += 1
+    return f'Your score is {score}/{len(questions)}'
+
+# DELETE BELOW LATER (kept for reference to figure out username submission things)
+
+# @app.route("/register", methods=['GET', 'POST'])
+# def register():
+#     form = RegistrationForm()
+#     if form.validate_on_submit(): # checks if entries are valid
+#         flash(f'Account created for {form.username.data}!', 'success')
+#         return redirect(url_for('home')) # if so - send to home page
+#     return render_template('register.html', title='Game', form=form)
 
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")

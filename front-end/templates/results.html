@@ -1,5 +1,31 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>{{ subtitle }}</h2>
-    <p>{{ text }}</p>
+    <!-- <h2>{{ subtitle }}</h2>
+    <p>{{ text }}</p> -->
+    <div class="content">
+        <div class="scoreboard-container">
+            <div class="scoreboard">
+                <h2>Local Scores</h2>
+                <ol class="local-scores">
+                    <li>Garfield<span class="score">100</span></li>
+                    <li>Nermal<span class="score">50</span></li>
+                    <li>Odie<span class="score">20</span></li>
+                    <li>Jon Arbuckle<span class="score">1</span></li>
+                </ol>
+            </div>
+            <div class="scoreboard">
+                <h2>Global Scores</h2>
+                <ol class="global-scores">
+                    <li>Garfield<span class="score">100</span></li>
+                    <li>Nermal<span class="score">50</span></li>
+                    <li>Odie<span class="score">20</span></li>
+                    <li>Jon Arbuckle<span class="score">1</span></li>
+                </ol>
+            </div>
+        </div>
+        <div class="button-box">
+            <button class="button">New Quiz</button>
+            <button class="button">Change User</button>
+        </div>
+    </div>
 {% endblock content %}

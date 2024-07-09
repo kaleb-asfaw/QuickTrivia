@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/register">Register</a>
+
             <a class="nav-item nav-link" href="/results">Results</a>
           </div>
         </div>
@@ -28,9 +28,10 @@
     </nav>
   </header>
   <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <h1>This shows up on every page</h1> {% block content %}{% endblock %}
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <h1>QuickTrivia</h1>
+        {% block content %}{% endblock %}
       </div>
     </div>
   </main>

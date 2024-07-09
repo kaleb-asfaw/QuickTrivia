@@ -1,5 +1,49 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>{{ subtitle }}</h2>
-    <p>{{ text }}</p>
+    <!-- <h2>{{ subtitle }}</h2>
+    <p>{{ text }}</p> -->
+
+
+
+    <div class="content">
+        <p class = "center-text">Hi, and welcome to QuickTrivia! Here, you'll be able to test your knowledge on a variety of topics by answering trivia questions! Please enter your username below and select a trivia category to get started.</p>
+
+        <div class="username">
+            <label for="username">Enter your username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <div class="categories">
+            <label for="category">Select a trivia category:</label><br>
+            <select id="category" name="category" size="10">
+                <option>General Knowledge</option>
+                <option>Entertainment: Books</option>
+                <option>Entertainment: Film</option>
+                <option>Entertainment: Music</option>
+                <option>Entertainment: Musicals & Theatres</option>
+                <option>Entertainment: Television</option>
+                <option>Entertainment: Video Games</option>
+                <option>Entertainment: Board Games</option>
+                <option>Science & Nature</option>
+                <option>Science: Computers</option>
+                <option>Science: Mathematics</option>
+                <option>Mythology</option>
+                <option>Sports</option>
+                <option>Geography</option>
+                <option>History</option>
+                <option>Politics</option>
+                <option>Art</option>
+                <option>Celebrities</option>
+                <option>Animals</option>
+                <option>Vehicles</option>
+                <option>Entertainment: Comics</option>
+                <option>Science: Gadgets</option>
+                <option>Entertainment: Japanese Anime & Manga</option>
+                <option>Entertainment: Cartoon & Animations</option>
+            </select>
+        </div>
+        <div class="button-box">
+        <button class="start-button">Start Trivia!</button>
+        </div>
+    </div>
 {% endblock content %}

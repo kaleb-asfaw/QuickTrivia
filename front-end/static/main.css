@@ -2,14 +2,58 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+
+  /* font-family: Arial, sans-serif;
+  text-align: center; */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1 {
+  font-size: 2em;
+  color: #ff6f61;
+  margin-top: 20px;
+  text-align: center
+}
+
+h2, h3, h4, h6 {
   color: #444444;
 }
 
+h5{
+  color: #686868;
+}
+/* TO DELETE
+.horiz-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+.text-wrapper {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Aligns items with space between them */
+}
+
+.center-text{
+  text-align: center
+}
+
+.right{
+  text-align: right
+}
+
+.left{
+  text-align: left
+}
+
 .bg-steel {
-  background-color: #ac8ed1;
+  background-color: #ff6f61;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -77,4 +121,73 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+
+.content {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    line-height: 1.5;
+}
+.username {
+    margin: 20px;
+}
+.categories {
+    margin: 20px;
+    text-align: center;
+}
+select {
+    width: 200px;
+    height: 150px;
+}
+.button-box{
+    margin: 20px;
+    text-align: center;
+}
+.start-button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.start-button:hover {
+    background-color: #fb9477;
+}
+
+/* for scoreboard containers */
+.scoreboard-container {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 20px; 
+}
+
+.scoreboard {
+  flex: 1; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  text-align:center
+}
+
+.scoreboard h2 {
+  margin-top: 0;
+}
+
+.local-scores {
+  text-align:left
+}
+
+.global-scores {
+  text-align:left
+}
+
+.scoreboard ol li {
+  margin-bottom: 5px; /* Add spacing between items */
+}
+
+.scoreboard ol li .score {
+  float: right; /* Align scores to the right */
+  font-weight: bold; /* Optional: Make scores bold */
 }
