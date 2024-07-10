@@ -7,13 +7,14 @@ from unittest.mock import patch, MagicMock
 # Add the frontend directory to the sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
+with patch('src.leaderboard.credentials.Certificate', new_callable=MagicMock):
+    with patch('src.leaderboard.firestore.client', new_callable=MagicMock):
+        with patch('src.leaderboard.firebase_admin.initialize_app', new_callable=MagicMock):
+            from frontend.app import app as flask_app
     
 class TestFlaskServer(unittest.TestCase):
-    @patch('src.leaderboard.credentials.Certificate', new_callable=MagicMock)
-    @patch('src.leaderboard.firestore.client', new_callable=MagicMock)
-    @patch('src.leaderboard.firebase_admin.initialize_app', new_callable=MagicMock)    
+   
     def setUp(self):
-        from frontend.app import app as flask_app
         flask_app.config['TESTING'] = True
         flask_app.config['WTF_CSRF_ENABLED'] = False  # Disable CSRF for testing
         self.app = flask_app.test_client()
