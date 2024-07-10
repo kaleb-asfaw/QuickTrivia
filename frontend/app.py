@@ -35,15 +35,37 @@ def start():
     questions = get_parsed_trivia_questions(int(category))
     
     # Render the quiz page with the username and questions
-    return render_template('gamepage.html', username=username, questions=questions)
+    return render_template('gamepage.html', username=username, questions=questions, category=category)
+
+
 
 @app.route("/results", methods=['POST', 'GET'])
 def results():
-
+    
     # calculate score if necessary
     if request.method == 'POST':
+        username = request.form['username']
+        category = request.form['category']
+        questions = []
+        
+
+        index = 0
+        # populate questions from form
+        while f'questions[{index}][question]' in request.form:
+            question_data = {
+                'question': request.form[f'questions[{index}][question]'],
+                'correct_answer': request.form[f'questions[{index}][correct_answer]'],
+                'choices': request.form.getlist(f'questions[{index}][choices][]')
+            }
+            questions.append(question_data)
+            index += 1
+
+        
+
         score = 0
         for i, question in enumerate(questions):
+
+            
             # Get the selected answer for each question
             selected_answer = request.form.get(f'question{i + 1}')
             if selected_answer is None: # safety for unanswered questions
@@ -59,13 +81,6 @@ def results():
 
     return render_template('results.html', results_str = results_str)
 
-
-# category = 1 # TODO: update this to take the input from home.html
-# questions = get_parsed_trivia_questions(category)
-
-@app.route("/gamepage")
-def gamepage():
-    return render_template('gamepage.html', questions=questions)
 
 
 

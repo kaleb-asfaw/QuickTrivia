@@ -2,26 +2,40 @@
 {% block content %}
 
 <!-- Lel feel free to change I just wanted to make sure username + questions are output -->>
-<h2>Welcome, {{ username }}!</h2>
+<!-- <h2>Welcome, {{ username }}!</h2>
 <h2>Here are your questions, fool </h2>
 {% for question in questions %}
   <p>{{question}}</p>
-{% endfor %}
+{% endfor %} -->
 
 <!-- <div class="horiz-container"> -->
-  <!-- <div class="text-wrapper">
-    <div class="h2 left">Category</div>
-    <div class="h5 right">Player username</div>
+ <div class="text-wrapper">
+    <div class="h2 left">{{ category }}</div>
+    <div class="h5 right">{{ username }}</div>
   </div>
 
   <div class="container mt-5">
     <form action="/results" method="post">
+      <input type="hidden" name="username" value="{{ username }}">
+      <input type="hidden" name="category" value="{{ category }}">
+      <!-- <input type="hidden" name="questions" value="{{ questions }}"> -->
+
       {% for question in questions %}
+
+      <!-- input tag to pass each question and correct answer -->
+      <input type="hidden" name="questions[{{ loop.index0 }}][question]" value="{{ question.question }}">
+      <input type="hidden" name="questions[{{ loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
+    
+
       {% set outer_loop = loop %}
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ question.question }}</h5>
                 {% for choice in question.choices %}
+
+                <!-- input tag to pass each choice -->
+                <input type="hidden" name="questions[{{ outer_loop.index0 }}][choices][]" value="{{ choice }}">
+
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="question{{ outer_loop.index }}" id="choice{{ loop.index }}" value="{{ choice }}">
                     <label class="form-check-label" for="choice{{ loop.index }}">
@@ -34,7 +48,7 @@
       {% endfor %}
       <button type="submit" class="btn btn-primary">Submit Answers</button>
     </form>
-</div> -->
+</div> 
 
 
 {% endblock content %}
