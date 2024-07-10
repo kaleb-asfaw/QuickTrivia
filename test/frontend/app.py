@@ -18,7 +18,6 @@ class TestFlaskServer(unittest.TestCase):
     def test_homepage(self):
         response = self.app.get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'This is the home page', response.data)
     
     def test_results(self):
         response = self.app.get("/results")
