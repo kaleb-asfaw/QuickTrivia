@@ -4,6 +4,10 @@ from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
+from src.loc_scoreboard import update_scoreboard, get_local_scores
+from src.leaderboard import add_score, get_leaderboard
+import secrets
+import sqlite3
 from src.constants import ID_TO_CATEGORIES
 
 
@@ -73,13 +77,24 @@ def results():
                 score += 1
 
         results_str = f'Your score is {score}/{len(questions)}'
+
+        update_scoreboard(username, score)         # update the sqlite3 database
+        local_scores = get_local_scores()          # get the top 10 local scores [username, score]
+        add_score(username, score)            # update firebase_admin
+        global_best = get_leaderboard()
+        global_scores =  global_best[0]["scores"]
+
+
+
     else:
         results_str = f'Play to see your score!'
+        local_scores = get_local_scores()
+        global_best = get_leaderboard()
+        global_scores =  global_best[0]["scores"]
 
-    return render_template('results.html', results_str = results_str)
 
+    return render_template('results.html', results_str = results_str, local_scores = local_scores, global_scores = global_scores)
     
-
 @app.route("/update_server", methods=['POST'])
 def webhook():
     if request.method == 'POST':
