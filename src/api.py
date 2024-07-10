@@ -1,5 +1,7 @@
 import requests
 import json
+import random
+import html
 
 # we have (thus far) decided to set question type to default multiple and difficulty to medium
 def get_trivia_questions(category, amount=10, difficulty='medium', 
@@ -79,6 +81,58 @@ def get_trivia_questions(category, amount=10, difficulty='medium',
     return response
 
 
+def get_parsed_trivia_questions(category):
+    """
+    Args:
+        category (int): Category of questions. Corresponds to category ID in database
+
+    Returns:
+        list of dictionaries representing questions in this format:
+        questions = [
+            {
+                'question': 'What is the capital of France?',
+                'choices': ['a) Paris', 'b) London', 'c) Berlin', 'd) Rome'],
+                'correct_answer': 'a'
+            },
+            {
+                'question': 'Who wrote "Hamlet"?',
+                'choices': ['a) William Shakespeare', 'b) Jane Austen',
+                            'c) Charles Dickens', 'd) Mark Twain'],
+                'correct_answer': 'a'
+            },
+        ]
+    """
+    response = get_trivia_questions(category+8).json()
+
+    questions = []
+
+    # map each q to dict, add lettering to the front of each choice
+    for q_data in response["results"]:
+        raw_choices = q_data["incorrect_answers"] + [q_data["correct_answer"]]
+        random.shuffle(raw_choices)
+
+        lettered_choices = []
+        ans = None
+
+        for letter, choice in zip('abcd', raw_choices):
+            lettered_choices.append(f'{letter}) {choice}')
+
+            if choice == q_data["correct_answer"]:
+                ans = letter
+        
+
+        this_question = {'question': html.unescape(q_data["question"]),
+                         'choices': lettered_choices,
+                         'correct_answer': ans
+                         }
+        
+        
+        questions.append(this_question)
+    return questions
+    
+    
+
+
 # parsing this info to look at sample questions
 def parse_data(response):
     for data in response['results']:
@@ -90,3 +144,4 @@ def parse_data(response):
     
 # response = get_trivia_questions(9).json()
 # parse_data(response)
+
