@@ -4,26 +4,21 @@ from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
-import secrets
 from src.constants import ID_TO_CATEGORIES
 
 
-app = Flask(__name__)                    # this gets the name of the file so Flask knows it's name
+app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
-# INSTRUCTIONS TO RUN APP: # TODO: figure out if we need secret keys for real???
-# 1. open python interpreter by running python3 in terminal
-# 2. run import secrets
-# 3. run secrets.token_hex(16), then exit() to exit the interpreter
-# 4. create a file called config.py (in the quicktrivia folder) and add this line: SECRET_KEY = 'paste your secret key here'
+
 try:
     from config import SECRET_KEY
     app.config['SECRET_KEY'] = SECRET_KEY
 except ImportError:
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
-@app.route("/")                          # this tells you the URL the method below is related to
+@app.route("/")
 def home():
-    return render_template('home.html', subtitle='Home', text='This is the home page')   # this prints HTML to the webpage
+    return render_template('home.html')
 
 # Define the route to handle form submission for home page (username + category)
 @app.route('/start', methods=['POST'])
@@ -36,7 +31,8 @@ def start():
     questions = get_parsed_trivia_questions(category_num)
     
     # Render the quiz page with the username and questions
-    return render_template('gamepage.html', username = username, questions = questions, category = ID_TO_CATEGORIES[category_num])
+    return render_template('gamepage.html', username = username, 
+                           questions = questions, category = ID_TO_CATEGORIES[category_num])
 
 
 
@@ -67,7 +63,7 @@ def results():
         for i, question in enumerate(questions):
 
             
-            # Get the selected answer for each question
+            # Get selected answer for each question
             selected_answer = request.form.get(f'question{i + 1}')
             if selected_answer is None: # safety for unanswered questions
                 continue
@@ -94,5 +90,5 @@ def webhook():
     else:
         return 'Wrong event type', 400
 
-if __name__ == '__main__':               # this should always be at the end 
+if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

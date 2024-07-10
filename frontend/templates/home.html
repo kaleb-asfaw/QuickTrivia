@@ -8,7 +8,7 @@
     <div class="content">
         <p class = "center-text">Hi, and welcome to QuickTrivia! Here, you'll be able to test your knowledge on a variety of topics by answering trivia questions! Please enter your username below and select a trivia category to get started.</p>
         
-        <form action="{{ url_for('start') }}" method="post">
+        <form action="{{ url_for('start') }}" method="POST">
             <div class="username">
                 <label for="username">Enter your username:</label>
                 <input type="text" id="username" name="username">
