@@ -1,56 +1,86 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<!-- Lel feel free to change I just wanted to make sure username + questions are output -->
-<!-- <h2>Welcome, {{ username }}!</h2>
-<h2>Here are your questions, fool </h2>
-{% for question in questions %}
-  <p>{{question}}</p>
-{% endfor %} -->
-
-<!-- <div class="horiz-container"> -->
- <div class="text-wrapper">
+<!-- Text wrapper for displaying category and user's username -->
+<div class="text-wrapper">
     <div class="h2 left">{{ category }}</div>
     <div class="h5 right">{{ username }}</div>
-  </div>
+</div>
 
-  <div class="container mt-5">
-    <form action="/results" method="post">
-      <input type="hidden" name="username" value="{{ username }}">
-      <input type="hidden" name="category" value="{{ category }}">
-      <!-- <input type="hidden" name="questions" value="{{ questions }}"> -->
-
-      {% for question in questions %}
-
-      <!-- input tag to pass each question and correct answer -->
-      <input type="hidden" name="questions[{{ loop.index0 }}][question]" value="{{ question.question }}">
-      <input type="hidden" name="questions[{{ loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
+<!-- Main container for the quiz content -->
+<div class="container mt-5">
+    <!-- Question counter, initially set to 'Question 1' -->
+    <div id="questionCounter" class="h4 mb-3">Question 1 of {{ questions|length }}</div>
     
+    <!-- Form setup for quiz submission -->
+    <form id="quizForm" action="/results" method="post">
+        <input type="hidden" name="username" value="{{ username }}">
+        <input type="hidden" name="category" value="{{ category }}">
 
-      {% set outer_loop = loop %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ question.question }}</h5>
-                {% for choice in question.choices %}
-
-                <!-- input tag to pass each choice -->
-                <input type="hidden" name="questions[{{ outer_loop.index0 }}][choices][]" value="{{ choice }}">
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question{{ outer_loop.index }}" id="choice{{ loop.index }}" value="{{ choice }}">
-                    <label class="form-check-label" for="choice{{ loop.index }}">
-                        {{ choice }}
-                    </label>
+        <!-- Loop through each question provided -->
+        {% for question in questions %}
+        <!-- Each question container is hidden initially; displayed one at a time via JavaScript -->
+        <div class="question-container" id="question{{ loop.index0 }}" style="display: none;">
+            <!-- Hidden fields to pass question data for score -->
+            <input type="hidden" name="questions[{{ loop.index0 }}][question]" value="{{ question.question }}">
+            <input type="hidden" name="questions[{{ loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
+            
+            <!-- Card layout for each question -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.question }}</h5>
+                    {% for choice in question.choices %}
+                    <input type="hidden" name="questions[{{ loop.index0 }}][choices][]" value="{{ choice }}">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index0 }}" value="{{ choice }}">
+                        <label class="form-check-label" for="choice{{ loop.index }}">
+                            {{ choice }}
+                        </label>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary">Submit Answers</button>
+        {% endfor %}
+        <!-- Button to navigate to the next question, managed by JavaScript -->
+        <button type="button" class="btn btn-primary" onclick="showNextQuestion()">Next Question</button>
+        <!-- Submit button, hidden initially; shown when last question is reached -->
+        <button type="submit" class="btn btn-success" id="submitQuiz" style="display: none;">Submit Answers</button>
     </form>
 </div> 
 
 
+<!-- JavaScript for managing question navigation and hidden elements -->
+<script>
+var currentQuestionIndex = 0;
+var totalQuestions = {{ questions|length }};
+
+function showNextQuestion() {
+    // Hide current question
+    if (currentQuestionIndex > 0) {
+        document.getElementById('question' + (currentQuestionIndex - 1)).style.display = 'none';
+    }
+
+    // Show next question
+    if (currentQuestionIndex < totalQuestions) {
+        document.getElementById('question' + currentQuestionIndex).style.display = 'block';
+        currentQuestionIndex++;
+
+        // Update question counter
+        document.getElementById('questionCounter').innerText = 'Question ' + currentQuestionIndex + ' of ' + totalQuestions;
+
+        // Changes the button to submit if last button is reached
+        if (currentQuestionIndex === totalQuestions) {
+            document.getElementById('submitQuiz').style.display = 'inline';
+            document.querySelector('button[onclick="showNextQuestion()"]').style.display = 'none';
+        }
+    }
+}
+
+window.onload = function() {
+    // For sequential question display; start by showing the first question
+    showNextQuestion();
+};
+</script>
+
 {% endblock content %}
-
-
