@@ -3,16 +3,17 @@ from firebase_admin import credentials, firestore
 import sys, os
 
 
-# Use the environment variable for the path to the service account key
+# Check if credentials.json exists
 cred_path = "credentials.json"
-# cred_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'credentials.json'))
-if not cred_path:
-    raise ValueError("The credentials are not set.")
-
-# Initialize Firebase Admin SDK with the service account key
-cred = credentials.Certificate(cred_path)
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+if not os.path.exists(cred_path):
+    # Handle the case where credentials.json is missing (e.g., log a warning)
+    print("Warning: credentials.json not found. Firebase Admin SDK not initialized.")
+    db = None  # Initialize db as None or handle gracefully in your functions
+else:
+    # Initialize Firebase Admin SDK with the service account key
+    cred = credentials.Certificate(cred_path)
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
 
 
 def add_score(username, score):
