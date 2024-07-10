@@ -8,6 +8,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 
 # Mock Firebase Admin initialization and imports
 with patch('firebase_admin.initialize_app'):
+    # Set a dummy path for credentials.json
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'dummy_path.json'
+
+    # Import after mocking
     from frontend.app import app as flask_app
     from src.leaderboard import add_score, get_leaderboard
 
