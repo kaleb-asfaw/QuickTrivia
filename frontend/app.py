@@ -92,7 +92,8 @@ def results():
     else:
         results_str = f'Play to see your score!'
         local_scores = get_local_scores()
-
+        global_best = get_leaderboard()
+        global_scores =  global_best[0]["scores"]
 
 
     return render_template('results.html', results_str = results_str, local_scores = local_scores, global_scores = global_scores)
