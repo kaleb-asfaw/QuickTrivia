@@ -1,15 +1,11 @@
 from flask import Flask, render_template, url_for, flash, redirect, url_for, request
-from forms import RegistrationForm
+# from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
 import secrets
 from src.constants import ID_TO_CATEGORIES
-
-
-
-
 
 
 app = Flask(__name__)                    # this gets the name of the file so Flask knows it's name
@@ -19,7 +15,11 @@ proxied = FlaskBehindProxy(app)
 # 2. run import secrets
 # 3. run secrets.token_hex(16), then exit() to exit the interpreter
 # 4. create a file called config.py (in the quicktrivia folder) and add this line: SECRET_KEY = 'paste your secret key here'
-app.config['SECRET_KEY'] = secrets.token_hex(16)
+try:
+    from config import SECRET_KEY
+    app.config['SECRET_KEY'] = SECRET_KEY
+except ImportError:
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 @app.route("/")                          # this tells you the URL the method below is related to
 def home():

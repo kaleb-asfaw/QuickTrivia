@@ -24,3 +24,7 @@ jobs:
       - name: api.py unittests
         working-directory: ./test/src
         run: python3 -m unittest api.py
+      
+      - name: app.py unittests
+        working-directory: ./test/frontend
+        run: python3 -m unittest app.py

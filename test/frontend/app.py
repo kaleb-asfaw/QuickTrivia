@@ -18,11 +18,11 @@ class TestFlaskServer(unittest.TestCase):
     def test_homepage(self):
         response = self.app.get("/")
         self.assertEqual(response.status_code, 200)
-        # self.assertIn(b'This is the home page', response.data)
+        self.assertIn(b'This is the home page', response.data)
     
-    # def test_gamepage(self):
-    #     response = self.app.get("/gamepage")
-    #     self.assertEqual(response.status_code, 200)
+    def test_results(self):
+        response = self.app.get("/results")
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
