@@ -7,14 +7,14 @@ from unittest.mock import patch, MagicMock
 # Add the frontend directory to the sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-# Mock Firebase credentials initialization
-with patch('firebase_admin.initialize_app'):
-    with patch('firebase_admin.firestore.client'):
-        from frontend.app import app as flask_app
+# Mock Firebase Admin and Firestore clients
+@patch('firebase_admin.initialize_app')
+@patch('firebase_admin.firestore.client')
     
 class TestFlaskServer(unittest.TestCase):
    
     def setUp(self):
+        from frontend.app import app as flask_app  # Import Flask app after mocking
         flask_app.config['TESTING'] = True
         flask_app.config['WTF_CSRF_ENABLED'] = False  # Disable CSRF for testing
         self.app = flask_app.test_client()
