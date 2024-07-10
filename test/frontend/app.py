@@ -5,7 +5,7 @@ import os
 # Add the frontend directory to the sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from frontend.app import app as flask_app
+from frontend.app import app as flask_app 
 
 class TestFlaskServer(unittest.TestCase):
     def setUp(self):
