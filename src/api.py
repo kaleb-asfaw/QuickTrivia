@@ -115,7 +115,7 @@ def get_parsed_trivia_questions(category):
         ans = None
 
         for letter, choice in zip('abcd', raw_choices):
-            lettered_choices.append(f'{letter}) {choice}')
+            lettered_choices.append(html.unescape((f'{letter}) {choice}')))
 
             if choice == q_data["correct_answer"]:
                 ans = letter
