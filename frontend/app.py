@@ -82,6 +82,7 @@ def results():
 
     return render_template('results.html', results_str = results_str)
 
+    
 
 @app.route("/update_server", methods=['POST'])
 def webhook():
