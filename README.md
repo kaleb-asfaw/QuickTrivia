@@ -62,9 +62,6 @@ You are now connected and can compete with other players!
 ### 3. Playing the game
 Now, just run
 ```
-python3 game.py
+python3 frontend/app.py
 ```
-and enjoy playing!
-
-
-[![Tests](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/testunits.yaml/badge.svg)](https://github.com/kaleb-asfaw/QuickTrivia/actions/workflows/testunits.yaml)
+and go to your localhost (http://127.0.0.1:5000) to enjoy playing!
