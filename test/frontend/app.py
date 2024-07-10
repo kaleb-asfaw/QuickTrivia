@@ -2,12 +2,12 @@ import unittest
 import sys
 import os
 from unittest.mock import patch, MagicMock
-from frontend.app import app as flask_app 
 
 
 # Add the frontend directory to the sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
+from frontend.app import app as flask_app 
 
 class TestFlaskServer(unittest.TestCase):
    
