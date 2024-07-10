@@ -65,6 +65,9 @@ def get_local_scores():
     conn = sqlite3.connect('scoreboard.db')
     cursor = conn.cursor()    
 
+    # Check if database and table exist; create if not
+    create_database()
+
     cursor.execute('SELECT username, score from Users ORDER BY score DESC LIMIT 10')
     top_users = cursor.fetchall() 
 
