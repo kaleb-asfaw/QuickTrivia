@@ -1,7 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect, url_for, request
+from flask import Flask, render_template, url_for, flash, redirect, request
 # from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
-import sys,os
+import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
 import secrets
@@ -83,7 +83,15 @@ def results():
     return render_template('results.html', results_str = results_str)
 
 
-
+@app.route("/update_server", methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        repo = git.Repo('/home/quicktrivia/QuickTrivia')
+        origin = repo.remotes.origin
+        origin.pull()
+        return 'Updated PythonAnywhere successfully', 200
+    else:
+        return 'Wrong event type', 400
 
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")
