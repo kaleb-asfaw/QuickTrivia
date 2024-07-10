@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
+
+<!-- Lel feel free to change I just wanted to make sure username + questions are output -->>
+<h2>Welcome, {{ username }}!</h2>
+<h2>Here are your questions, fool </h2>
+{% for question in questions %}
+  <p>{{question}}</p>
+{% endfor %}
+
 <!-- <div class="horiz-container"> -->
-  <div class="text-wrapper">
+  <!-- <div class="text-wrapper">
     <div class="h2 left">Category</div>
     <div class="h5 right">Player username</div>
   </div>
@@ -26,7 +34,7 @@
       {% endfor %}
       <button type="submit" class="btn btn-primary">Submit Answers</button>
     </form>
-</div>
+</div> -->
 
 
 {% endblock content %}

@@ -25,6 +25,18 @@ app.config['SECRET_KEY'] = secrets.token_hex(16)
 def home():
     return render_template('home.html', subtitle='Home', text='This is the home page')   # this prints HTML to the webpage
 
+# Define the route to handle form submission for home page (username + category)
+@app.route('/start', methods=['POST'])
+def start():
+    username = request.form['username']
+    category = request.form['category']
+    
+    # Fetch the questions for the selected category
+    questions = get_parsed_trivia_questions(int(category))
+    
+    # Render the quiz page with the username and questions
+    return render_template('gamepage.html', username=username, questions=questions)
+
 @app.route("/results", methods=['POST', 'GET'])
 def results():
 
@@ -48,8 +60,8 @@ def results():
     return render_template('results.html', results_str = results_str)
 
 
-category = 1 # TODO: update this to take the input from home.html
-questions = get_parsed_trivia_questions(category)
+# category = 1 # TODO: update this to take the input from home.html
+# questions = get_parsed_trivia_questions(category)
 
 @app.route("/gamepage")
 def gamepage():
