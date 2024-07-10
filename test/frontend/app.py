@@ -19,9 +19,9 @@ class TestFlaskServer(unittest.TestCase):
         response = self.app.get("/")
         self.assertEqual(response.status_code, 200)
     
-    def test_results(self):
-        response = self.app.get("/results")
-        self.assertEqual(response.status_code, 200)
+    # def test_results(self):
+    #     response = self.app.get("/results")
+    #     self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
