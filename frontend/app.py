@@ -63,7 +63,7 @@ def results():
         for i, question in enumerate(questions):
 
             
-            # Get the selected answer for each question
+            # Get selected answer for each question
             selected_answer = request.form.get(f'question{i + 1}')
             if selected_answer is None: # safety for unanswered questions
                 continue
