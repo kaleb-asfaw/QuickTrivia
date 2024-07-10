@@ -4,17 +4,12 @@ from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
-import secrets
 from src.constants import ID_TO_CATEGORIES
 
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
-# INSTRUCTIONS TO RUN APP: # TODO: figure out if we need secret keys for real???
-# 1. open python interpreter by running python3 in terminal
-# 2. run import secrets
-# 3. run secrets.token_hex(16), then exit() to exit the interpreter
-# 4. create a file called config.py (in the quicktrivia folder) and add this line: SECRET_KEY = 'paste your secret key here'
+
 try:
     from config import SECRET_KEY
     app.config['SECRET_KEY'] = SECRET_KEY

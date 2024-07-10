@@ -19,20 +19,21 @@
 
         <!-- Loop through each question provided -->
         {% for question in questions %}
+        {% set outer_loop = loop %}
         <!-- Each question container is hidden initially; displayed one at a time via JavaScript -->
-        <div class="question-container" id="question{{ loop.index0 }}" style="display: none;">
+        <div class="question-container" id="question{{ outer_loop.index0 }}" style="display: none;">
             <!-- Hidden fields to pass question data for score -->
-            <input type="hidden" name="questions[{{ loop.index0 }}][question]" value="{{ question.question }}">
-            <input type="hidden" name="questions[{{ loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
+            <input type="hidden" name="questions[{{ outer_loop.index0 }}][question]" value="{{ question.question }}">
+            <input type="hidden" name="questions[{{ outer_loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
             
             <!-- Card layout for each question -->
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ question.question }}</h5>
                     {% for choice in question.choices %}
-                    <input type="hidden" name="questions[{{ loop.index0 }}][choices][]" value="{{ choice }}">
+                    <input type="hidden" name="questions[{{ outer_loop.index0 }}][choices][]" value="{{ choice }}">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="question{{ loop.index0 }}" value="{{ choice }}">
+                        <input class="form-check-input" type="radio" name="question{{ outer_loop.index0 }}" value="{{ choice }}">
                         <label class="form-check-label" for="choice{{ loop.index }}">
                             {{ choice }}
                         </label>
@@ -53,7 +54,7 @@
 <!-- JavaScript for managing question navigation and hidden elements -->
 <script>
 var currentQuestionIndex = 0;
-var totalQuestions = {{ questions|length }};
+var totalQuestions = 10;
 
 function showNextQuestion() {
     // Hide current question
