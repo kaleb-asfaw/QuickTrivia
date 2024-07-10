@@ -3,9 +3,9 @@ from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from config import SECRET_KEY
 from src.api import get_parsed_trivia_questions
 import secrets
+from src.constants import ID_TO_CATEGORIES
 
 
 
@@ -29,13 +29,14 @@ def home():
 @app.route('/start', methods=['POST'])
 def start():
     username = request.form['username']
-    category = request.form['category']
+    category_num = int(request.form['category'])
+
     
     # Fetch the questions for the selected category
-    questions = get_parsed_trivia_questions(int(category))
+    questions = get_parsed_trivia_questions(category_num)
     
     # Render the quiz page with the username and questions
-    return render_template('gamepage.html', username=username, questions=questions, category=category)
+    return render_template('gamepage.html', username = username, questions = questions, category = ID_TO_CATEGORIES[category_num])
 
 
 
