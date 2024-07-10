@@ -4,10 +4,10 @@ import sys, os
 
 
 # Use the environment variable for the path to the service account key
-# cred_path = "credentials.json"
-# # cred_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'credentials.json'))
-# if not cred_path:
-#     raise ValueError("The credentials are not set.")
+cred_path = "credentials.json"
+# cred_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'credentials.json'))
+if not cred_path:
+    raise ValueError("The credentials are not set.")
 
 # Initialize Firebase Admin SDK with the service account key
 cred = credentials.Certificate(cred_path)
