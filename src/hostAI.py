@@ -2,7 +2,7 @@ from openai import OpenAI
 import sys, os
 
 # Try to load the API key from an environment variable first
-openai_key = os.getenv('OPENAI_KEY')
+openai_key = os.getenv('OPENAI_API_KEY')
 
 # If the API key is not set in the environment, try to import it from config.py
 if not openai_key:
