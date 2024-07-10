@@ -61,5 +61,15 @@ def print_scoreboard():
     print()
     conn.close()
 
+def get_local_scores():
+    conn = sqlite3.connect('scoreboard.db')
+    cursor = conn.cursor()    
+
+    cursor.execute('SELECT username, score from Users ORDER BY score DESC LIMIT 10')
+    top_users = cursor.fetchall() 
+
+    conn.close()
+    return top_users
+
 def reset_scoreboard():
     pass

@@ -7,19 +7,17 @@
             <div class="scoreboard">
                 <h2>Local Scores</h2>
                 <ol class="local-scores">
-                    <li>Garfield<span class="score">100</span></li>
-                    <li>Nermal<span class="score">50</span></li>
-                    <li>Odie<span class="score">20</span></li>
-                    <li>Jon Arbuckle<span class="score">1</span></li>
+                    {% for username, score in local_scores %}
+                        <li>{{ username }}<span class="score">{{ score }}</span></li>
+                    {% endfor %}
                 </ol>
             </div>
             <div class="scoreboard">
                 <h2>Global Scores</h2>
                 <ol class="global-scores">
-                    <li>Garfield<span class="score">100</span></li>
-                    <li>Nermal<span class="score">50</span></li>
-                    <li>Odie<span class="score">20</span></li>
-                    <li>Jon Arbuckle<span class="score">1</span></li>
+                    {% for entry in global_scores %}
+                        <li>{{ entry['username'] }}<span class="score">{{ entry['score'] }}</span></li>
+                    {% endfor %}
                 </ol>
             </div>
         </div>
