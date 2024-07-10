@@ -30,10 +30,3 @@ NUMS = [str(i) for i in range(1, 25)]
 
 PROHIBITED = {'global_best', 'oj', 'OJ', 'Oj'}
 PROTECTED = {"oJ"}
-
-def fun():
-    DIC = {}
-    for name, ID in CATEGORIES:
-        DIC[ID] = name
-    print(DIC)
-fun()
