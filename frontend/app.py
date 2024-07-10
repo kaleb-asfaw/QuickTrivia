@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
-# from forms import RegistrationForm
+from flask import Flask, render_template, url_for, flash, redirect, request, session
+import forms
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
+import src.constants as c
 from src.loc_scoreboard import update_scoreboard, get_local_scores
 from src.leaderboard import add_score, get_leaderboard
 import secrets
@@ -20,24 +21,42 @@ try:
 except ImportError:
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
-@app.route("/")
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    form = forms.RegistrationForm()
+    if form.validate_on_submit():
+        username = form.username.data.strip()
 
-# Define the route to handle form submission for home page (username + category)
-@app.route('/start', methods=['POST'])
+
+        
+        # Validate username against prohibited list
+        if username in c.PROHIBITED:
+            form.username.errors.append("This username is prohibited. Please choose another one.")
+            return render_template('home.html', form=form)
+        
+        # Make username lowercase if not in protected list
+        if username not in c.PROTECTED:
+            username = username.lower()
+        
+
+        category = form.category.data
+        session['username'] = username
+        session['category'] = category
+        return redirect(url_for('start'))
+    return render_template('home.html', form=form)
+
+@app.route('/start', methods=['GET', 'POST'])
 def start():
-    username = request.form['username']
-    category_num = int(request.form['category'])
+    username = session.get('username')
+    category = session.get('category')
+    category_num = int(category)
 
-    
     # Fetch the questions for the selected category
     questions = get_parsed_trivia_questions(category_num)
     
     # Render the quiz page with the username and questions
-    return render_template('gamepage.html', username = username, 
-                           questions = questions, category = ID_TO_CATEGORIES[category_num])
-
+    return render_template('gamepage.html', username=username, 
+                           questions=questions, category=c.ID_TO_CATEGORIES[category_num])
 
 
 @app.route("/results", methods=['POST', 'GET'])
