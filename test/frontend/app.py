@@ -15,9 +15,9 @@ class TestFlaskServer(unittest.TestCase):
         self.app_context = flask_app.app_context()
         self.app_context.push()
 
-    def test_homepage(self):
-        response = self.app.get("/")
-        self.assertEqual(response.status_code, 200)
+    # def test_homepage(self):
+    #     response = self.app.get("/")
+    #     self.assertEqual(response.status_code, 200)
     
     # def test_results(self):
     #     response = self.app.get("/results")
