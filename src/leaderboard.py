@@ -30,6 +30,7 @@ else:
     cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred)
 
+
 db = firestore.client()
 
 def add_score(username, score):

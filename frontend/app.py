@@ -80,14 +80,14 @@ def results():
             questions.append(question_data)
             index += 1
 
+
         
 
         score = 0
         for i, question in enumerate(questions):
-
             
             # Get selected answer for each question
-            selected_answer = request.form.get(f'question{i + 1}')
+            selected_answer = request.form.get(f'question{i}')
             if selected_answer is None: # safety for unanswered questions
                 continue
 
