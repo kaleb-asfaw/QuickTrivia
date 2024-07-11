@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, session
-import forms
+from frontend.forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -23,7 +23,7 @@ except ImportError:
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    form = forms.RegistrationForm()
+    form = RegistrationForm()
     if form.validate_on_submit():
         username = form.username.data.strip()
 
