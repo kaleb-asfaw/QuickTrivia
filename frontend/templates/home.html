@@ -1,50 +1,42 @@
 {% extends "layout.html" %}
 {% block content %}
-    <!-- <h2>{{ subtitle }}</h2>
-    <p>{{ text }}</p> -->
-
-
-
     <div class="content">
-        <p class = "center-text">Hi, and welcome to QuickTrivia! Here, you'll be able to test your knowledge on a variety of topics by answering trivia questions! Please enter your username below and select a trivia category to get started.</p>
-        
-
-            <form method="POST" action="{{ url_for('home') }}">
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <div class="form-group">
-                        {{ form.username.label(class="form-control-label") }}
-                        {% if form.username.errors %}
-                            {{ form.username(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.username(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
+        <p class="center-text">Hi, and welcome to QuickTrivia! Here, you'll be able to test your knowledge on a variety of topics by answering trivia questions! Please enter your username below and select a trivia category to get started.</p>
+        <form method="POST" action="{{ url_for('home') }}">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
     
-                    <div class="form-group">
-                        {{ form.category.label(class="form-control-label") }}
-                        {% if form.category.errors %}
-                            {{ form.category(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.category.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.category(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
+                <div class="form-group">
+                    {{ form.category.label(class="form-control-label") }}
+                    {% if form.category.errors %}
+                        {{ form.category(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.category.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.category(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
     
-                    <div class="button-box">
-                        <button class="start-button">Start Trivia!</button>
-                    </div>
-                </fieldset>
-            </form>
-
+                <div class="button-box">
+                    <button class="start-button">Start Trivia!</button>
+                </div>
+            </fieldset>
+        </form>
     </div>
 {% endblock content %}

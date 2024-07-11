@@ -22,8 +22,10 @@
             </div>
         </div>
         <div class="button-box">
-            <button class="button">New Quiz</button>
-            <button class="button">Change User</button>
+            <!-- Redirects to the homepage and prepopulates the username -->
+            <a href="{{ url_for('home', username=session['username']) }}" class="button">New Quiz</a>
+            <!-- Redirects to the homepage without prepopulating the username -->
+            <a href="{{ url_for('home') }}" class="button">Change User</a>
         </div>
     </div>
 {% endblock content %}
