@@ -20,7 +20,7 @@
         <!-- Loop through each question provided -->
         {% for question in questions %}
         {% set outer_loop = loop %}
-        <!-- Each question container is hidden initially; displayed one at a time via JavaScript -->
+        <!-- Each question card is hidden initially; displayed one at a time via JavaScript -->
         <div class="question-container" id="question{{ outer_loop.index0 }}" style="display: none;">
             <!-- Hidden fields to pass question data for score -->
             <input type="hidden" name="questions[{{ outer_loop.index0 }}][question]" value="{{ question.question }}">
@@ -44,9 +44,9 @@
         </div>
         {% endfor %}
         <!-- Button to navigate to the next question, managed by JavaScript -->
-        <button type="button" class="btn btn-primary" onclick="showNextQuestion()">Next Question</button>
+        <button type="button" class="btn btn-next" onclick="showNextQuestion()">Next Question</button>
         <!-- Submit button, hidden initially; shown when last question is reached -->
-        <button type="submit" class="btn btn-success" id="submitQuiz" style="display: none;">Submit Answers</button>
+        <button type="submit" class="btn btn-submit" id="submitQuiz" style="display: none;">Submit Answers</button>
     </form>
 </div> 
 

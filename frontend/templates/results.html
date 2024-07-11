@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <!-- <h2>{{ subtitle }}</h2> -->
-    <p>{{ results_str }}</p>
+    <p class="results-text">{{ results_str }}</p>
     <div class="content">
         <div class="scoreboard-container">
             <div class="scoreboard">
@@ -23,9 +23,9 @@
         </div>
         <div class="button-box">
             <!-- Redirects to the homepage and prepopulates the username -->
-            <a href="{{ url_for('home', username=session['username']) }}" class="button">New Quiz</a>
+            <a href="{{ url_for('home', username=session['username']) }}" class="start-button">New Quiz</a>
             <!-- Redirects to the homepage without prepopulating the username -->
-            <a href="{{ url_for('home') }}" class="button">Change User</a>
+            <a href="{{ url_for('home') }}" class="start-button">Change User</a>
         </div>
     </div>
 {% endblock content %}
