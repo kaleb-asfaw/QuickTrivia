@@ -24,25 +24,25 @@ except ImportError:
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = RegistrationForm()
+    username_prepopulate = request.args.get('username', None)  # Retrieves the username if provided
+
+    if username_prepopulate:
+        form.username.data = username_prepopulate  # Prepopulates the form with the username
+
     if form.validate_on_submit():
         username = form.username.data.strip()
-
-
-        
-        # Validate username against prohibited list
         if username in c.PROHIBITED:
             form.username.errors.append("This username is prohibited. Please choose another one.")
             return render_template('home.html', form=form)
-        
-        # Make username lowercase if not in protected list
+
         if username not in c.PROTECTED:
             username = username.lower()
-        
 
         category = form.category.data
         session['username'] = username
         session['category'] = category
         return redirect(url_for('start'))
+
     return render_template('home.html', form=form)
 
 @app.route('/start', methods=['GET', 'POST'])
@@ -123,6 +123,7 @@ def webhook():
         return 'Updated PythonAnywhere successfully', 200
     else:
         return 'Wrong event type', 400
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
