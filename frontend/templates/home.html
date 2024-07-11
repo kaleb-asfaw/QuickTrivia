@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content">
+    <div class="content" style="max-width: 500px;">
         <p class="center-text">Hi, and welcome to QuickTrivia! Here, you'll be able to test your knowledge on a variety of topics by answering trivia questions! Please enter your username below and select a trivia category to get started.</p>
         <form method="POST" action="{{ url_for('home') }}">
             {{ form.hidden_tag() }}

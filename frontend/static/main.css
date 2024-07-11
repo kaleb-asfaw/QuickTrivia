@@ -40,7 +40,7 @@ h5{
 }
 
 .center-text{
-  text-align: center
+  text-align: center;
   margin-bottom: 20px;
   font-size: 18px;
 }
@@ -125,8 +125,8 @@ a.article-title:hover {
 }
 
 .content {
-    width: 50%;
-    max-width: 600px;
+    /* width: 50%;
+    max-width: 600px; */
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -223,6 +223,16 @@ select {
     max-width: 800px;
 }
 
+/* used in nav bar */
+.container-fluid {
+  border-radius: 8px;
+  padding: 20px;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: auto;
+  /* max-width: 800px; */
+}
+
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -262,12 +272,12 @@ select {
 
 
 .btn-submit {
-    background-color: green;
+    background-color: #ff6f61;
     color: white;
 }
 
 .btn-submit:hover {
-    background-color: #28a745;
+    background-color: #fb9477;
 }
 
 
