@@ -3,17 +3,28 @@ from firebase_admin import credentials, firestore
 import sys, os
 
 
+# MY VERSION THAT WORKS FOR ME
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Check if credentials.json exists
-cred_path = "credentials.json"
-if not os.path.exists(cred_path):
-    # Handle the case where credentials.json is missing (e.g., log a warning)
-    print("Warning: credentials.json not found. Firebase Admin SDK not initialized.")
-    db = None  # Initialize db as None or handle gracefully in your functions
-else:
-    # Initialize Firebase Admin SDK with the service account key
-    cred = credentials.Certificate(cred_path)
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
+cred_path = sys.path[0] + "/credentials.json"
+
+cred = credentials.Certificate(cred_path)
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+
+#   MAIN VERSION -- takes the if branch and fails because db is None
+# # Check if credentials.json exists
+# cred_path = "credentials.json"
+# if not os.path.exists(cred_path):
+#     # Handle the case where credentials.json is missing (e.g., log a warning)
+#     print("Warning: credentials.json not found. Firebase Admin SDK not initialized.")
+#     db = None  # Initialize db as None or handle gracefully in your functions
+# else:
+#     # Initialize Firebase Admin SDK with the service account key
+#     cred = credentials.Certificate(cred_path)
+#     firebase_admin.initialize_app(cred)
+#     db = firestore.client()
 
 
 def add_score(username, score):
