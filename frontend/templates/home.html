@@ -22,14 +22,14 @@
                 <div class="form-group">
                     {{ form.category.label(class="form-control-label") }}
                     {% if form.category.errors %}
-                        {{ form.category(class="form-control form-control-lg is-invalid") }}
+                        {{ form.category(class="form-control form-control-lg is-invalid form-control-select") }}
                         <div class="invalid-feedback">
                             {% for error in form.category.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.category(class="form-control form-control-lg") }}
+                        {{ form.category(class="form-control form-control-lg form-control-select") }}
                     {% endif %}
                 </div>
     

@@ -2,46 +2,47 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
-
-  /* font-family: Arial, sans-serif;
-  text-align: center; */
 }
 
 h1 {
   font-size: 2em;
   color: #ff6f61;
   margin-top: 20px;
-  text-align: center
+  text-align: center;
+  font-weight: bold;
 }
 
-h2, h3, h4, h6 {
+h2 {
+    color: #444444;
+    font-size: 20px;
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+}
+
+h3, h4, h6 {
   color: #444444;
+  font-size: 24px;
 }
 
 h5{
   color: #686868;
+  font-size: 24px;
 }
-/* TO DELETE
-.horiz-container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
 
 .text-wrapper {
   max-width: 1000px;
   margin: 20px auto;
+  margin-bottom: 10px;
   padding: 20px;
   display: flex;
   justify-content: space-between; /* Aligns items with space between them */
+  align-items: center;
 }
 
 .center-text{
   text-align: center
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .right{
@@ -81,7 +82,7 @@ h5{
 }
 
 a.article-title:hover {
-  color: #428bca;
+  color: #ff6f61;
   text-decoration: none;
 }
 
@@ -125,53 +126,183 @@ a.article-title:hover {
 
 .content {
     width: 50%;
+    max-width: 600px;
     margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: left;
     line-height: 1.5;
 }
+
 .username {
     margin: 20px;
 }
+
 .categories {
     margin: 20px;
     text-align: center;
 }
+
 select {
     width: 200px;
     height: 150px;
 }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.form-control-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control-lg {
+    width: 100%;
+    height: auto;
+    padding: 6px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-control-select {
+    margin: auto;
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 16px;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+    text-align: left;
+}
+
 .button-box{
     margin: 20px;
     text-align: center;
 }
+
 .start-button {
     background-color: #ff6f61;
     color: white;
-    border: none;
+    text-decoration: none;
+    border-radius: 5px;
     padding: 10px 20px;
+    display: inline-block;
     font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
+
 .start-button:hover {
     background-color: #fb9477;
 }
 
+/* Style for gamepage */
+.container {
+    border-radius: 8px;
+    padding: 20px;
+    padding-top: 20px;
+    margin: auto;
+    max-width: 800px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 18px;
+}
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    }
+
+.btn-next {
+    background-color: #ff6f61;
+    color: white;
+}
+
+.btn-next:hover {
+    background-color: #fb9477;
+}
+
+
+.btn-submit {
+    background-color: green;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #28a745;
+}
+
+
 /* for scoreboard containers */
 .scoreboard-container {
-  display: flex; 
-  justify-content: space-between; 
-  margin-bottom: 20px; 
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap; 
+    align-items: stretch;
+    margin-bottom: 30px;
+    /* padding: 0 10px; */
 }
 
 .scoreboard {
-  flex: 1; 
-  padding: 10px; 
-  border: 1px solid #ccc; 
-  text-align:center
+    background-color: #f8f9fa;
+    flex: 1 1 48%; 
+    padding: 20px; 
+    margin: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .scoreboard h2 {
-  margin-top: 0;
+    text-align: center;
+    color: #ff6f61;
+}
+
+.results-text {
+    text-align: center;
+    font-size: 24px;
+    color: black;
+    margin-top: 20px;
+    font-style: italic;
 }
 
 .local-scores {
