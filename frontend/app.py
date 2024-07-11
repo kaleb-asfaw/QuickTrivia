@@ -85,22 +85,15 @@ def results():
 
         score = 0
         for i, question in enumerate(questions):
-            print(i, question['question'])
-            
             
             # Get selected answer for each question
             selected_answer = request.form.get(f'question{i}')
-            print(selected_answer)
             if selected_answer is None: # safety for unanswered questions
-                print('incorrect :(')
                 continue
 
             letter_choice = selected_answer[0]
             if letter_choice == question['correct_answer']:
-                print('correct!')
                 score += 1
-            else:
-                print('incorrect')
 
         results_str = f'Your score is {score}/{len(questions)}'
 
