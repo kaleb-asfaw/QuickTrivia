@@ -1,14 +1,14 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, session
-from frontend.forms import RegistrationForm
+from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
+import secrets
+import sqlite3
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
 import src.constants as c
 from src.loc_scoreboard import update_scoreboard, get_local_scores
 from src.leaderboard import add_score, get_leaderboard
-import secrets
-import sqlite3
 from src.constants import ID_TO_CATEGORIES
 
 

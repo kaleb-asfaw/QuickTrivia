@@ -1,31 +1,37 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
-import sys, os
+import os
+import base64
+import json
 
 
-# MY VERSION THAT WORKS FOR ME
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# Check if credentials.json exists
-cred_path = sys.path[0] + "/credentials.json"
+# encoded the credentials in a base64 string as an env variable
+credentials_base64 = os.getenv('CREDENTIALS_JSON_BASE64')
+credentials_json = None
 
-cred = credentials.Certificate(cred_path)
-firebase_admin.initialize_app(cred)
+if credentials_base64:
+    try:
+        credentials_json = base64.b64decode(credentials_base64).decode('utf-8')
+        credentials_data = json.loads(credentials_json)
+        with open('temp_credentials.json', 'w') as f:
+            f.write(credentials_json)
+        cred = credentials.Certificate('temp_credentials.json')
+        firebase_admin.initialize_app(cred)
+        print("PROPERLY USED ENV VAR")
+        os.remove('temp_credentials.json')
+    except Exception as e:
+        raise EnvironmentError("Failed to decode or parse credentials from the environment variable. Error: {}".format(str(e)))
+else:
+    print("NOT USING ENV VAR")
+    cred_path = "credentials.json"
+    if not os.path.exists(cred_path):
+        raise ValueError("The credentials are not set and the credentials.json file is missing.")
+
+    cred = credentials.Certificate(cred_path)
+    firebase_admin.initialize_app(cred)
+
+
 db = firestore.client()
-
-
-#   MAIN VERSION -- takes the if branch and fails because db is None
-# # Check if credentials.json exists
-# cred_path = "credentials.json"
-# if not os.path.exists(cred_path):
-#     # Handle the case where credentials.json is missing (e.g., log a warning)
-#     print("Warning: credentials.json not found. Firebase Admin SDK not initialized.")
-#     db = None  # Initialize db as None or handle gracefully in your functions
-# else:
-#     # Initialize Firebase Admin SDK with the service account key
-#     cred = credentials.Certificate(cred_path)
-#     firebase_admin.initialize_app(cred)
-#     db = firestore.client()
-
 
 def add_score(username, score):
     user_ref = db.collection('leaderboard').document(username)
