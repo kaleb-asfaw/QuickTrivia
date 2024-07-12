@@ -3,37 +3,27 @@
 
 <!-- Text wrapper for displaying category and user's username -->
 <div class="text-wrapper">
-    <div class="h2 left">{{ category }}</div>
-    <div class="h5 right">{{ username }}</div>
+    <div class="h2 left" style="color: #686868;">{{ category }}</div>
+    <div class="h5 right" style="color: #686868;">{{ username }}</div>
 </div>
 
-<!-- Main container for the quiz content -->
-<div class="container mt-5">
-    <!-- Question counter, initially set to 'Question 1' -->
-    <div id="questionCounter" class="h4 mb-3">Question 1 of {{ questions|length }}</div>
+<div class="container">
+    <div id="questionCounter" class="h4 mb-3">Question {{ session['current_question'] + 1 }} of 10</div>
     
-    <!-- Form setup for quiz submission -->
-    <form id="quizForm" action="/results" method="post">
+    <form id="quizForm" action="/feedback" method="post">
         <input type="hidden" name="username" value="{{ username }}">
         <input type="hidden" name="category" value="{{ category }}">
 
-        <!-- Loop through each question provided -->
-        {% for question in questions %}
-        {% set outer_loop = loop %}
-        <!-- Each question card is hidden initially; displayed one at a time via JavaScript -->
-        <div class="question-container" id="question{{ outer_loop.index0 }}" style="display: none;">
-            <!-- Hidden fields to pass question data for score -->
-            <input type="hidden" name="questions[{{ outer_loop.index0 }}][question]" value="{{ question.question }}">
-            <input type="hidden" name="questions[{{ outer_loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
-            
-            <!-- Card layout for each question -->
+        <div class="question-container">
+            <input type="hidden" name="question" value="{{ question.question }}">
+            <input type="hidden" name="correct_answer" value="{{ question.correct_answer }}">
+
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ question.question }}</h5>
                     {% for choice in question.choices %}
-                    <input type="hidden" name="questions[{{ outer_loop.index0 }}][choices][]" value="{{ choice }}">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="question{{ outer_loop.index0 }}" value="{{ choice }}">
+                        <input class="form-check-input" type="radio" name="answer" value="{{ choice }}">
                         <label class="form-check-label" for="choice{{ loop.index }}">
                             {{ choice }}
                         </label>
@@ -42,46 +32,8 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-        <!-- Button to navigate to the next question, managed by JavaScript -->
-        <button type="button" class="btn btn-next" onclick="showNextQuestion()">Next Question</button>
-        <!-- Submit button, hidden initially; shown when last question is reached -->
-        <button type="submit" class="btn btn-submit" id="submitQuiz" style="display: none;">Submit Answers</button>
+        <button type="submit" class="btn btn-next">Submit Answer</button>
     </form>
-</div> 
-
-
-<!-- JavaScript for managing question navigation and hidden elements -->
-<script>
-var currentQuestionIndex = 0;
-var totalQuestions = 10;
-
-function showNextQuestion() {
-    // Hide current question
-    if (currentQuestionIndex > 0) {
-        document.getElementById('question' + (currentQuestionIndex - 1)).style.display = 'none';
-    }
-
-    // Show next question
-    if (currentQuestionIndex < totalQuestions) {
-        document.getElementById('question' + currentQuestionIndex).style.display = 'block';
-        currentQuestionIndex++;
-
-        // Update question counter
-        document.getElementById('questionCounter').innerText = 'Question ' + currentQuestionIndex + ' of ' + totalQuestions;
-
-        // Changes the button to submit if last button is reached
-        if (currentQuestionIndex === totalQuestions) {
-            document.getElementById('submitQuiz').style.display = 'inline';
-            document.querySelector('button[onclick="showNextQuestion()"]').style.display = 'none';
-        }
-    }
-}
-
-window.onload = function() {
-    // For sequential question display; start by showing the first question
-    showNextQuestion();
-};
-</script>
+</div>
 
 {% endblock content %}

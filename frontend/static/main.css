@@ -29,6 +29,12 @@ h5{
   font-size: 24px;
 }
 
+.feedback-text {
+  color: #ff6173; /* Red color */
+  font-weight: bold; /* Bold text */
+  font-size: 1.25rem; /* Larger text size */
+}
+
 .text-wrapper {
   max-width: 1000px;
   margin: 20px auto;
@@ -218,7 +224,7 @@ select {
 .container {
     border-radius: 8px;
     padding: 20px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     margin: auto;
     max-width: 800px;
 }

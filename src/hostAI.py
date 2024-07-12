@@ -35,6 +35,12 @@ def get_commentary(q, ans, is_correct, streak):
    is_correct (bool): True if user answered correctly, False o.w.
    streak (int): Represents the number of q's the user has answered <is_correct>
    """
+
+#    if is_correct:
+#        return f'to {q['question']} you answered {ans} and you are correct! your streak is {streak}'
+#    else:
+#        return f'to {q['question']}. you are incorrect :( the correct answer was {ans}. your streak is {streak}'
+
    correctness = "right" if is_correct else "wrong"
    correctness2 = "correctly" if correctness=="right" else "incorrectly"
 
