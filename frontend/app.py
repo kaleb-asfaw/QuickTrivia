@@ -2,8 +2,6 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 import sys,os,git
-import secrets
-import sqlite3
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
 import src.constants as c
@@ -20,8 +18,6 @@ try:
     app.config['SECRET_KEY'] = SECRET_KEY
 except ImportError:
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
-
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -101,7 +97,7 @@ def game():
 
 @app.route('/feedback', methods=['POST'])
 def feedback():
-    """ endpoint to fetch commentary and load feedback.html """
+    """ endpoint to update score, fetch commentary, load feedback.html """
     # get and set vars
     questions = session.get('questions')
     curr_question = questions[session['current_question']]
