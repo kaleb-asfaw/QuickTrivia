@@ -9,7 +9,6 @@ from src.api import get_parsed_trivia_questions
 import src.constants as c
 from src.loc_scoreboard import update_scoreboard, get_local_scores
 from src.leaderboard import add_score, get_leaderboard
-from src.constants import ID_TO_CATEGORIES
 from src.hostAI import get_commentary
 
 
@@ -55,15 +54,17 @@ def home():
 
 @app.route('/start', methods = ['GET'])
 def start():
-    username = session.get('username')
+    """ endpoint for setting up the game when the user first clicks start trivia """
+
+    # set category in session
     category = session.get('category')
     category_num = int(category)
     session['category_disp'] = c.ID_TO_CATEGORIES[category_num]
     
-
+    # get questions
     questions = get_parsed_trivia_questions(category_num)
 
-    
+    # set other session vars
     session['current_question'] = 0
     session['score'] = 0
     session['streak'] = 0
@@ -71,71 +72,63 @@ def start():
 
     return redirect(url_for('game'))
 
-    return render_template('gamepage.html', username=username, 
-                           questions=questions, category=c.ID_TO_CATEGORIES[category_num])
 
 
 @app.route('/increment-question', methods=['GET'])
 def increment_question():
+    """ endpoint for redirect logic when going from feedback.html -> next question / finish """
     if session['current_question'] < 9: # can still increment
-        print('HELLO, INCREMENTING YOUR QUESTION')
         session['current_question'] += 1
         return redirect(url_for('game'))
     else:
-        print('HELLO, YOU ARE DONE WITH THE TRIVIA')
         return redirect(url_for('results', from_increment_question=True))
 
 
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
+    """ endpoint to render gamepage.html """
     
+    # set session vars
     username = session.get('username')
     curr_question = session.get('questions')[session.get('current_question')]
     category = session['category_disp']
     
     
-    # Render the quiz page with the username and questions
+    # Render the quiz page with the username, category, and questions
     return render_template('gamepage.html', username=username, 
                            question=curr_question, category=category)
 
 @app.route('/feedback', methods=['POST'])
 def feedback():
-    print(f'I AM TAKING YOU TO THE FEED BACK PAGE AND YOUR CURRENT QUESTION IS {session['current_question']}')
-    if session['current_question'] < 10:
+    """ endpoint to fetch commentary and load feedback.html """
+    # get and set vars
+    questions = session.get('questions')
+    curr_question = questions[session['current_question']]
+    streak_before = session['streak']
+    index = session['current_question']
+    user_answer = request.form.get(f'answer')
+    session['user_answer'] = user_answer
+    correct_answer = questions[index]['correct_answer']
 
-        username = session.get('username')
-        category = session.get('category')
-        category_num = int(category)
-        session['category_disp'] = c.ID_TO_CATEGORIES[category_num]
-        questions = session.get('questions')
-        curr_question = questions[session['current_question']]
-        streak_before = session['streak']
-
-        if request.method == 'POST': # got here from feedback (not from start)
-            index = session['current_question']
-            user_answer = request.form.get(f'answer')
-            session['user_answer'] = user_answer
-            correct_answer = questions[index]['correct_answer']
-
-            is_correct = user_answer and user_answer[0] == correct_answer
-            if is_correct:
-                session['score'] += 1
-                session['streak'] += 1
-            else:
-                session['streak'] = 0
-            
-        feedback = get_commentary(curr_question, user_answer, is_correct, (streak_before, session['streak']))
-
-        session['feedback'] = feedback
-        
-        return render_template('feedback.html', feedback=session['feedback'], username = session['username'], category = session['category_disp'], question = session.get('questions')[session.get('current_question')])
+    # update score and streak
+    is_correct = user_answer and user_answer[0] == correct_answer
+    if is_correct:
+        session['score'] += 1
+        session['streak'] += 1
     else:
-        return redirect(url_for('results'))
+        session['streak'] = 0
+    
+    # get and set commentary
+    feedback = get_commentary(curr_question, user_answer, is_correct, (streak_before, session['streak']))
+    session['feedback'] = feedback
+    
+    return render_template('feedback.html', feedback=session['feedback'],
+                            username = session['username'], category = session['category_disp'],
+                            question = session.get('questions')[session.get('current_question')])
 
 @app.route("/results", methods=['POST', 'GET'])
 def results():
-    print('YOU ARRIVED TO THE RESULTS PAGE')
     finished_trivia = request.args.get('from_increment_question', False)
 
     # calculate score if necessary
@@ -148,14 +141,13 @@ def results():
 
         results_str = f'Your score is {score}/{len(questions)}'
 
-        update_scoreboard(username, score)         # update the sqlite3 database
-        local_scores = get_local_scores()          # get the top 10 local scores [username, score]
-        add_score(username, score)            # update firebase_admin
+        update_scoreboard(username, score)           # update the sqlite3 database
+        local_scores = get_local_scores()            # get the top 10 local scores [username, score]
+        add_score(username, score)                   # update firebase_admin
         global_best = get_leaderboard()
         global_scores =  global_best[0]["scores"]
 
-
-
+    # just display scoreboards
     else:
         results_str = f'Play to see your score!'
         local_scores = get_local_scores()
