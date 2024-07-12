@@ -3,11 +3,11 @@
 
 <!-- Text wrapper for displaying category and user's username -->
 <div class="text-wrapper">
-    <div class="h2 left">{{ category }}</div>
-    <div class="h5 right">{{ username }}</div>
+    <div class="h2 left" style="color: #686868;">{{ category }}</div>
+    <div class="h5 right" style="color: #686868;">{{ username }}</div>
 </div>
 
-<div class="container mt-5">
+<div class="container">
     <div id="questionCounter" class="h4 mb-3">Question {{ session['current_question'] + 1 }} of 10</div>
     
     <form id="quizForm" action="/feedback" method="post">
