@@ -4,9 +4,13 @@ on: push
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+    env:
+      CREDENTIALS_JSON_BASE64: ${{ secrets.CREDENTIALS_JSON_BASE64 }}
+      FLASK_KEY: ${{ secrets.FLASK_KEY }}
+      OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -16,12 +20,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip pytest
           pip install -r requirements.txt
-
-      - name: dummy unittests
-        working-directory: ./test
-        run: python3 -m unittest dummy.py
       
-      - name: api.py unittests
+      - name: TriviaAPI unittests
         working-directory: ./test/src
         run: python3 -m unittest api.py
 
+      - name: Flask Application unittests
+        working-directory: ./test/frontend
+        run: python3 -m unittest app.py

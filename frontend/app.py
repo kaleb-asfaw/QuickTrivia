@@ -12,12 +12,10 @@ from src.hostAI import get_commentary
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+if not os.environ.get('FLASK_KEY'):
+    raise EnvironmentError("Config key for Flask app was not set")
 
-try:
-    from config import SECRET_KEY
-    app.config['SECRET_KEY'] = SECRET_KEY
-except ImportError:
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 
 @app.route('/', methods=['GET', 'POST'])

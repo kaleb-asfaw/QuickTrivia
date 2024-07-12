@@ -1,21 +1,10 @@
 from openai import OpenAI
-import sys, os
+import os
 
-# Try to load the API key from an environment variable first
-openai_key = os.getenv('OPENAI_API_KEY')
-
-# If the API key is not set in the environment, try to import it from config.py
-if not openai_key:
-    try:
-        print("didn't get the environment variable")
-        sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-        import config
-        openai_key = config.OPENAI_KEY
-    except ImportError:
-        pass
+openai_key = os.getenv('OPENAI_KEY')
 
 if not openai_key:
-    raise EnvironmentError("API key not found. Set the OPENAI_API_KEY environment variable or provide it in a config.py file.")
+    raise EnvironmentError("Environment variable for OpenAI key was not set")
 
 client = OpenAI(
 api_key = openai_key
@@ -36,11 +25,6 @@ def get_commentary(q, ans, is_correct, streak):
    streak (int): Represents the number of q's the user has answered <is_correct>
    """
 
-#    if is_correct:
-#        return f'to {q['question']} you answered {ans} and you are correct! your streak is {streak}'
-#    else:
-#        return f'to {q['question']}. you are incorrect :( the correct answer was {ans}. your streak is {streak}'
-
    correctness = "right" if is_correct else "wrong"
    correctness2 = "correctly" if correctness=="right" else "incorrectly"
 
@@ -60,16 +44,16 @@ def get_commentary(q, ans, is_correct, streak):
    return response.choices[0].message.content.strip()
 
 if __name__ == "__main__":
-    # while True:
-    #     user_input = input("You: ")
-    #     if user_input.lower() in ["quit", "exit", "bye"]:
-    #         break
-    #     response = chatbot(user_input)
-    #     print("Chatbot: ", response)
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["quit", "exit", "bye"]:
+            break
+        response = chatbot(user_input)
+        print("Chatbot: ", response)
     
     # q = "What color is a polar bear's skin?"
     # ans = "Black"
     # is_correct = True
     # streak = 4
     # print(get_commentary(q, ans, is_correct, streak))
-    pass
+    
