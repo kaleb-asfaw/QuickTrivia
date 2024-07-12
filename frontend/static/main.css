@@ -131,8 +131,8 @@ a.article-title:hover {
 }
 
 .content {
-    width: 50%;
-    max-width: 600px;
+    /* width: 50%;
+    max-width: 600px; */
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -278,12 +278,12 @@ select {
 
 
 .btn-submit {
-    background-color: green;
+    background-color: #ff6f61;
     color: white;
 }
 
 .btn-submit:hover {
-    background-color: #28a745;
+    background-color: #fb9477;
 }
 
 
