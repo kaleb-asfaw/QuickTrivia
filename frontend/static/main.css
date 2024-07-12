@@ -224,9 +224,19 @@ select {
 .container {
     border-radius: 8px;
     padding: 20px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     margin: auto;
     max-width: 800px;
+}
+
+/* used in nav bar */
+.container-fluid {
+  border-radius: 8px;
+  padding: 20px;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: auto;
+  /* max-width: 800px; */
 }
 
 .card {

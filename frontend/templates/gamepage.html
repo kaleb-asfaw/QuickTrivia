@@ -7,7 +7,7 @@
     <div class="h5 right">{{ username }}</div>
 </div>
 
-<div class="container mt-5">
+<div class="container">
     <div id="questionCounter" class="h4 mb-3">Question {{ session['current_question'] + 1 }} of 10</div>
     
     <form id="quizForm" action="/feedback" method="post">
@@ -81,7 +81,7 @@
 
 
 <!-- JavaScript for managing question navigation and hidden elements -->
-<script>
+<!-- <script>
 var currentQuestionIndex = 0;
 var totalQuestions = 10;
 
@@ -111,6 +111,6 @@ window.onload = function() {
     // For sequential question display; start by showing the first question
     showNextQuestion();
 };
-</script>
+</script> -->
 
 {% endblock content %}
