@@ -4,7 +4,7 @@ import os
 import base64
 import json
 
-# for kaylee -- remove later
+
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Check if credentials.json exists
@@ -12,6 +12,7 @@ cred_path = sys.path[0] + "/credentials.json"
 
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
+
 
 # encoded the credentials in a base64 string as an env variable
 # credentials_base64 = os.getenv('CREDENTIALS_JSON_BASE64')
