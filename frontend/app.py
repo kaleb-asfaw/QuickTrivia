@@ -101,14 +101,14 @@ def feedback():
     # get and set vars
     questions = session.get('questions')
     curr_question = questions[session['current_question']]
-    streak_before = session['streak']
     index = session['current_question']
     user_answer = request.form.get(f'answer')
     session['user_answer'] = user_answer
+    correct_answer_letter = questions[index]['correct_answer_letter']
     correct_answer = questions[index]['correct_answer']
 
     # update score and streak
-    is_correct = user_answer and user_answer[0] == correct_answer
+    is_correct = user_answer and user_answer[0] == correct_answer_letter
     if is_correct:
         session['score'] += 1
         session['streak'] += 1
@@ -116,7 +116,7 @@ def feedback():
         session['streak'] = 0
     
     # get and set commentary
-    feedback = get_commentary(curr_question, user_answer, is_correct, (streak_before, session['streak']))
+    feedback = get_commentary(curr_question, correct_answer, is_correct, session['streak'])
     session['feedback'] = feedback
     
     return render_template('feedback.html', feedback=session['feedback'],

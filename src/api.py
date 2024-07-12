@@ -112,18 +112,23 @@ def get_parsed_trivia_questions(category):
         random.shuffle(raw_choices)
 
         lettered_choices = []
-        ans = None
+        ans_letter, ans_text = None, None
 
         for letter, choice in zip('abcd', raw_choices):
-            lettered_choices.append(html.unescape((f'{letter}) {choice}')))
+            disp_text = html.unescape((f'{letter}) {choice}'))
+            lettered_choices.append(disp_text)
 
             if choice == q_data["correct_answer"]:
-                ans = letter
+                ans_letter = letter
+                ans_text = disp_text
+
+
         
 
         this_question = {'question': html.unescape(q_data["question"]),
                          'choices': lettered_choices,
-                         'correct_answer': ans
+                         'correct_answer': ans_text,
+                         'correct_answer_letter': ans_letter
                          }
         
         

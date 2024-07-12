@@ -37,9 +37,9 @@ def get_commentary(q, ans, is_correct, streak):
    """
 
    if is_correct:
-       return f'to {q['question']} you answered {ans} and you are correct! your streak is {streak[1]}'
+       return f'to {q['question']} you answered {ans} and you are correct! your streak is {streak}'
    else:
-       return f'to {q['question']} you answered {ans} and you are incorrect :( your streak is {streak[1]}'
+       return f'to {q['question']}. you are incorrect :( the correct answer was {ans}. your streak is {streak}'
 
 #    correctness = "right" if is_correct else "wrong"
 #    correctness2 = "correctly" if correctness=="right" else "incorrectly"
