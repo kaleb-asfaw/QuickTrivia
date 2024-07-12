@@ -115,6 +115,7 @@ def feedback():
         if request.method == 'POST': # got here from feedback (not from start)
             index = session['current_question']
             user_answer = request.form.get(f'answer')
+            session['user_answer'] = user_answer
             correct_answer = questions[index]['correct_answer']
 
             is_correct = user_answer and user_answer[0] == correct_answer
