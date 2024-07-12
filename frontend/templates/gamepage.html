@@ -7,26 +7,55 @@
     <div class="h5 right">{{ username }}</div>
 </div>
 
-<!-- Main container for the quiz content -->
 <div class="container mt-5">
-    <!-- Question counter, initially set to 'Question 1' -->
+    <div id="questionCounter" class="h4 mb-3">Question {{ session['current_question'] + 1 }} of 10</div>
+    
+    <form id="quizForm" action="/feedback" method="post">
+        <input type="hidden" name="username" value="{{ username }}">
+        <input type="hidden" name="category" value="{{ category }}">
+
+        <div class="question-container">
+            <input type="hidden" name="question" value="{{ question.question }}">
+            <input type="hidden" name="correct_answer" value="{{ question.correct_answer }}">
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.question }}</h5>
+                    {% for choice in question.choices %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer" value="{{ choice }}">
+                        <label class="form-check-label" for="choice{{ loop.index }}">
+                            {{ choice }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-next">Submit Answer</button>
+    </form>
+</div>
+
+<!-- Main container for the quiz content -->
+<!-- <div class="container mt-5">
+    <!-- Question counter, initially set to 'Question 1' --
     <div id="questionCounter" class="h4 mb-3">Question 1 of {{ questions|length }}</div>
     
-    <!-- Form setup for quiz submission -->
+    <!-- Form setup for quiz submission --
     <form id="quizForm" action="/results" method="post">
         <input type="hidden" name="username" value="{{ username }}">
         <input type="hidden" name="category" value="{{ category }}">
 
-        <!-- Loop through each question provided -->
+        <!-- Loop through each question provided --
         {% for question in questions %}
         {% set outer_loop = loop %}
-        <!-- Each question card is hidden initially; displayed one at a time via JavaScript -->
+        <!-- Each question card is hidden initially; displayed one at a time via JavaScript --
         <div class="question-container" id="question{{ outer_loop.index0 }}" style="display: none;">
-            <!-- Hidden fields to pass question data for score -->
+            <!-- Hidden fields to pass question data for score --
             <input type="hidden" name="questions[{{ outer_loop.index0 }}][question]" value="{{ question.question }}">
             <input type="hidden" name="questions[{{ outer_loop.index0 }}][correct_answer]" value="{{ question.correct_answer }}">
             
-            <!-- Card layout for each question -->
+            <!-- Card layout for each question --
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ question.question }}</h5>
@@ -43,12 +72,12 @@
             </div>
         </div>
         {% endfor %}
-        <!-- Button to navigate to the next question, managed by JavaScript -->
+        <!-- Button to navigate to the next question, managed by JavaScript --
         <button type="button" class="btn btn-next" onclick="showNextQuestion()">Next Question</button>
-        <!-- Submit button, hidden initially; shown when last question is reached -->
+        <-- Submit button, hidden initially; shown when last question is reached --
         <button type="submit" class="btn btn-submit" id="submitQuiz" style="display: none;">Submit Answers</button>
     </form>
-</div> 
+</div>  -->
 
 
 <!-- JavaScript for managing question navigation and hidden elements -->
