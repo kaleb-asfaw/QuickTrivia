@@ -2,9 +2,8 @@ import unittest
 import sys
 import os
 
-# Add the frontend directory to the sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontend')))
 from frontend.app import app as flask_app 
 
 class TestFlaskServer(unittest.TestCase):
@@ -19,9 +18,9 @@ class TestFlaskServer(unittest.TestCase):
         response = self.app.get("/")
         self.assertEqual(response.status_code, 200)
     
-    # def test_results(self):
-    #     response = self.app.get("/results")
-    #     self.assertEqual(response.status_code, 200)
+    def test_results(self):
+        response = self.app.get("/results")
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
