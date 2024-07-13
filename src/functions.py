@@ -4,6 +4,14 @@ import src.leaderboard as db
 import html
 from colorama import Fore, Style, init
 
+def compute_score(time_left):
+    seconds = 30 - time_left
+    if seconds > 30:
+        return 0
+    y = 1000 + 1000/30 - 1000/30*seconds
+    score = y
+    return 1000 if score > 1000 else score
+        
 
 def validate_username(username):
     # Convert username to lowercase
