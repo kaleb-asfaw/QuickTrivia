@@ -23,6 +23,10 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response.json()['response_code'], 1)
         self.assertEqual(response.json()['results'], [])
 
+    def test_server_overload(self):
+        for i in range(4): 
+            response = ape.get_trivia_questions(10)
+            self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':
