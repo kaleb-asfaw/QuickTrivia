@@ -2,6 +2,7 @@ import requests
 import json
 import random
 import html
+import time
 
 # we have (thus far) decided to set question type to default multiple and difficulty to medium
 def get_trivia_questions(category, amount=10, difficulty='medium', 
@@ -77,10 +78,15 @@ def get_trivia_questions(category, amount=10, difficulty='medium',
     }
 
     response = requests.get(base_url, params=params)
+    while response.status_code == 429:
+        print("Our servers are receiving too many requests, please wait a few seconds.")
+        time.sleep(5)
+        response = requests.get(base_url, params=params)
+
     response.raise_for_status()
     return response
 
-
+ 
 def get_parsed_trivia_questions(category):
     """
     Args:
@@ -135,8 +141,6 @@ def get_parsed_trivia_questions(category):
         questions.append(this_question)
     return questions
     
-    
-
 
 # parsing this info to look at sample questions
 def parse_data(response):
@@ -146,7 +150,10 @@ def parse_data(response):
         print(data['correct_answer'])
         print(data['incorrect_answers'])
 
-    
-# response = get_trivia_questions(9).json()
-# parse_data(response)
 
+if __name__ == "__main__":
+    # response = get_trivia_questions(9).json()
+    # parse_data(response)
+    for i in range(10): 
+        print(i)
+        get_trivia_questions(10)
