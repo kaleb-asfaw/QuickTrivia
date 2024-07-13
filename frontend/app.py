@@ -1,7 +1,8 @@
+import git
 from flask import Flask, render_template, url_for, flash, redirect, request, session, jsonify
 from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
-import sys,os,git
+import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.api import get_parsed_trivia_questions
 import src.constants as c
