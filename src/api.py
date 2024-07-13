@@ -74,7 +74,7 @@ def get_trivia_questions(category, amount=10, difficulty='medium',
         "amount": amount,
         "category": category,
         "difficulty": difficulty,
-        "type": question_type
+        "type": question_type 
     }
 
     response = requests.get(base_url, params=params)
