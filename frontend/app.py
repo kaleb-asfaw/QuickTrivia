@@ -136,8 +136,9 @@ def results():
 
         results_str = f'Your score is {score}/{len(questions)}'
 
-        update_scoreboard(username, score)           # update the sqlite3 database
-        local_scores = get_local_scores()            # get the top 10 local scores [username, score]
+        # removing the sqlit3 database since it is functionally a global database (defeats the purpose)
+        # update_scoreboard(username, score)           # update the sqlite3 database
+        # local_scores = get_local_scores()            # get the top 10 local scores [username, score]
         add_score(username, score)                   # update firebase_admin
         global_best = get_leaderboard()
         global_scores =  global_best[0]["scores"]
@@ -145,12 +146,12 @@ def results():
     # just display scoreboards
     else:
         results_str = f'Play to see your score!'
-        local_scores = get_local_scores()
+        # local_scores = get_local_scores()
         global_best = get_leaderboard()
         global_scores =  global_best[0]["scores"]
 
 
-    return render_template('results.html', results_str = results_str, local_scores = local_scores, global_scores = global_scores)
+    return render_template('results.html', results_str = results_str, global_scores = global_scores)
     
 @app.route("/update_server", methods=['POST'])
 def webhook():
