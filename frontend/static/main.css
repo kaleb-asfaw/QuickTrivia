@@ -4,6 +4,8 @@ body {
   margin-top: 5rem;
 }
 
+/* Header styles, used in all HTML files to maintain consistency */
+/* Used in layout.html for main heading */
 h1 {
   font-size: 2em;
   color: #ff6f61;
@@ -12,6 +14,7 @@ h1 {
   font-weight: bold;
 }
 
+/* Subheader styles, used across multiple files */
 h2 {
     color: #444444;
     font-size: 20px;
@@ -19,22 +22,20 @@ h2 {
     padding-bottom: 5px;
 }
 
-h3, h4, h6 {
+h3, h4, h5, h6 {
   color: #444444;
   font-size: 24px;
 }
 
-h5{
-  color: #686868;
-  font-size: 24px;
-}
 
+/* Feedback text style, used in quiz response cards in quiz.html */
 .feedback-text {
   color: #ff6173; /* Red color */
   font-weight: bold; /* Bold text */
   font-size: 1.25rem; /* Larger text size */
 }
 
+/* Text wrapper for aligning category and username, used in quiz.html */
 .text-wrapper {
   max-width: 1000px;
   margin: 20px auto;
@@ -45,6 +46,8 @@ h5{
   align-items: center;
 }
 
+
+/* Text alignment helpers, used throughout all HTML files for text alignment */
 .center-text{
   text-align: center;
   margin-bottom: 20px;
@@ -59,10 +62,13 @@ h5{
   text-align: left
 }
 
+
 .bg-steel {
   background-color: #ff6f61;
 }
 
+
+/* Navigation bar link styles, used in layout.html */
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
@@ -75,23 +81,33 @@ h5{
   font-weight: 500;
 }
 
+/* used in nav bar */
+.container-fluid {
+  border-radius: 8px;
+  padding: 20px;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: auto;
+}
+
+/* 
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
-}
+} */
 
-.article-title {
+/* .article-title {
   color: #444444;
 }
 
 a.article-title:hover {
   color: #ff6f61;
   text-decoration: none;
-}
-
+} */
+/* 
 .article-content {
   white-space: pre-line;
 }
@@ -117,9 +133,9 @@ a.article-title:hover {
   width: 25px;
   height: 25px;
   vertical-align: middle;
-}
+} */
 
-.account-img {
+/* .account-img {
   height: 125px;
   width: 125px;
   margin-right: 20px;
@@ -128,11 +144,10 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
-}
+} */
 
+/* Content section styling, used in home.html and results.html */
 .content {
-    /* width: 50%;
-    max-width: 600px; */
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -142,20 +157,22 @@ a.article-title:hover {
     line-height: 1.5;
 }
 
+/* Styling for username text in home.html */
 .username {
     margin: 20px;
 }
 
-.categories {
+/* .categories {
     margin: 20px;
     text-align: center;
-}
+} */
 
-select {
+/* select {
     width: 200px;
     height: 150px;
-}
+} */
 
+/* Form control styling for username and category fields, used in home.html */
 .form-group {
     margin-bottom: 15px;
 }
@@ -199,6 +216,7 @@ select {
     text-align: left;
 }
 
+/* Button styling, used in gamepage.html for navigation and submission */
 .button-box{
     margin: 20px;
     text-align: center;
@@ -229,16 +247,8 @@ select {
     max-width: 800px;
 }
 
-/* used in nav bar */
-.container-fluid {
-  border-radius: 8px;
-  padding: 20px;
-  padding-left: 40px;
-  padding-top: 20px;
-  margin: auto;
-  /* max-width: 800px; */
-}
 
+/* Used in gamepage.html to display questions in a card format */
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -259,6 +269,8 @@ select {
     font-size: 18px;
 }
 
+
+/* Specific button styling for next and submit actions, used in gamepage.html */
 .btn {
     border: none;
     padding: 10px 20px;
@@ -287,7 +299,7 @@ select {
 }
 
 
-/* for scoreboard containers */
+/* Scoreboard styling for scoreboard containers and dashboards, in results.html */
 .scoreboard-container {
     display: flex; 
     justify-content: space-between;
