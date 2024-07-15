@@ -1,21 +1,12 @@
 from openai import OpenAI
 import os
 
+# find API key, that's stored as an environment variable
 openai_key = os.getenv('OPENAI_KEY')
-
 if not openai_key:
     raise EnvironmentError("Environment variable for OpenAI key was not set")
 
-client = OpenAI(
-api_key = openai_key
-)
-
-def chatbot(prompt): # example usage of GPT (in terminal)
-    response = client.chat.completions.create(
-        messages=[{"role":"user", "content":prompt}],
-        model="gpt-3.5-turbo",
-    )
-    return response.choices[0].message.content.strip()
+client = OpenAI(api_key = openai_key)
 
 def get_commentary(q, ans, is_correct, streak):
    """
@@ -43,8 +34,18 @@ def get_commentary(q, ans, is_correct, streak):
     )
    return response.choices[0].message.content.strip()
 
+
+# chatbot func that can be used to validate connection to OpenAI
+def chatbot(prompt):
+    response = client.chat.completions.create(
+        messages=[{"role":"user", "content":prompt}],
+        model="gpt-3.5-turbo",
+    )
+    return response.choices[0].message.content.strip()
+
+
 if __name__ == "__main__":
-    while True:
+    while True: # example usage of chatbot func (just run this file)
         user_input = input("You: ")
         if user_input.lower() in ["quit", "exit", "bye"]:
             break

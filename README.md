@@ -1,13 +1,13 @@
 # QuickTrivia
 
-Welcome to QuickTrivia! This repository contains a fun trivia game that connects to a Firestore database, allowing you to compete with people globally. Follow the steps below to set up your environment and get started.
+Welcome to QuickTrivia, a game that uses an open-sourced trivia API to keep the questions modern. Play our game on the web here: https://quicktrivia.pythonanywhere.com/. If you'd like to play a local terminal version, please follow the setup instructions below.
 
 ## Prerequisites
 
 - Python 3.x installed on your machine
 - Internet access to download dependencies and connect to Firestore
 
-## Setup Instructions
+## Setup Instructions for terminal game
 
 ### 1. Setting Up a Virtual Environment
 
@@ -37,6 +37,7 @@ python -m venv env
 # Activate the virtual environment
 env\Scripts\activate
 ```
+
 #### 1a. Installing dependencies
 Make sure you are in the repository (cd /path/to/QuickTrivia) and have activated the virtual environment. Your cmd should look something like the following (MAC)
 ```
@@ -51,17 +52,31 @@ pip install -r requirements.txt
 This installs all the packages that are needed to run the game.
 
 ### 2. Adding Global Leaderboard Connection
-To connect to the community playing QuickTrivia, you will need access to the API key.
+To connect to the community playing QuickTrivia, you will need access to the API key. Here are instructions if you're on a Mac/using Bash
 
-- Create a file called "credentials.json" in your repository
-- Copy the json content in this Google Doc: https://docs.google.com/document/d/1W7bhVTqxE1Zp5jsFFTS0n3HmU2yNIL3l7djV9OFz1kM/edit
-- Paste it to "credentials.json"
+- Copy the json contents from this doc: https://docs.google.com/document/d/1W7bhVTqxE1Zp5jsFFTS0n3HmU2yNIL3l7djV9OFz1kM/edit
+- Create a file "credentials.json" in your directory and paste the contents from the doc inside
+- Open your terminal and run this:
+```
+base64 credentials.json > credentials.json.base64
+```
+- Next, copy and paste the contents of the newly created credentials.json.base64 file in here:
+```
+export CREDENTIALS_JSON_BASE64="HERE"
+```
+and run in the terminal.
+
+- If you're on Mac, confirm your changes by running
+```
+source ~/.bashrc 
+```
+- Run 
 
 You are now connected and can compete with other players!
 
 ### 3. Playing the game
 Now, just run
 ```
-python3 frontend/app.py
+python3 game.py
 ```
-and go to your localhost (http://127.0.0.1:5000) to enjoy playing!
+and enjoy playing!

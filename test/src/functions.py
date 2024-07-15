@@ -2,7 +2,6 @@ import unittest, time, sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 import src.functions as func
 
-
 class TestFunctions(unittest.TestCase):
     def test_validate_username_1(self):
         self.assertEqual(func.validate_username('oJ'), "VALID")

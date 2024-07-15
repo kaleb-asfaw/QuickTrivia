@@ -5,6 +5,10 @@ import html
 from colorama import Fore, Style, init
 
 def compute_score(time_left):
+    '''
+    Given time_left (str or int), return a score out of 1000.
+
+    '''
     seconds = 30 - time_left
     if seconds > 30:
         return 0
