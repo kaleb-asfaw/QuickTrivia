@@ -151,7 +151,7 @@ def results():
         global_scores =  global_best[0]["scores"]
 
 
-    return render_template('results.html', results_str = results_str, global_scores = global_scores)
+    return render_template('results.html', results_str = results_str, global_scores = global_scores) # we give the results page the global scores so it can output them
     
 @app.route("/update_server", methods=['POST'])
 def webhook():
